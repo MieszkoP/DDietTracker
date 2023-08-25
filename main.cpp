@@ -3,27 +3,28 @@
 #include <QApplication>
 #include <jsoncpp/json/json.h>
 #include <fstream>
+#include "size_unc.h"
 
 class Product
 {
 public:
     Product() = default;
 
-    int _kcalories = 0;
-    int _proteins = 0;
-    int _carbons = 0;
-    int _fats = 0;
-    int _mass = 0;
+    size_unc _kcalories = 0;
+    size_unc _proteins = 0;
+    size_unc _carbons = 0;
+    size_unc _fats = 0;
+    size_unc _mass = 0;
 };
 
 void ParseProduct(const Product& product, std::ofstream& file)
 {
     Json::Value root;
-    root["carbons"] = product._carbons;
-    root["kcalories"] = product._kcalories;
-    root["proteins"] = product._carbons;
-    root["fats"] = product._fats;
-    root["mass"] = product._mass;
+    root["carbons"] = product._carbons.GetValue();
+    root["kcalories"] = product._kcalories.GetValue();
+    root["proteins"] = product._carbons.GetValue();
+    root["fats"] = product._fats.GetValue();
+    root["mass"] = product._mass.GetValue();
     file << root;
 }
 
