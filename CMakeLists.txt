@@ -40,6 +40,9 @@ else()
     else()
         add_executable(DDietTracker
             ${PROJECT_SOURCES}
+            tst_size_unc.cpp
+
+
         )
     endif()
 endif()
@@ -76,3 +79,8 @@ set(CMAKE_PREFIX_PATH "~/vcpkg/packages/jsoncpp_x64-linux" ${CMAKE_PREFIX_PATH})
 find_package(jsoncpp CONFIG REQUIRED)
 include_directories(${jsoncpp_INCLUDE_DIRS})
 target_link_libraries(${PROJECT_NAME} PRIVATE JsonCpp::JsonCpp)
+
+set(CMAKE_PREFIX_PATH "/usr/src/gtest" ${CMAKE_PREFIX_PATH})
+
+include_directories(${gtest_INCLUDE_DIRS})
+target_link_libraries(${PROJECT_NAME} PRIVATE gtest)
