@@ -18,7 +18,7 @@ size_unc operator*(const size_unc &n1, const size_unc &n2)
 
 size_unc operator/(const size_unc &n1, const size_unc &n2)
 {
-    return n1*size_unc(1/n2._size, n2._unc/(n2._size*n2._size));
+    return size_unc(n1._size/n2._size, std::sqrt(n1._unc/n2._unc-n1._size/(n2._size*n2._size)*n2._unc));
 };
 
 float size_unc::GetUpperBound() const

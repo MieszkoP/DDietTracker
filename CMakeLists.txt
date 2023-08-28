@@ -84,3 +84,6 @@ set(CMAKE_PREFIX_PATH "/usr/src/gtest" ${CMAKE_PREFIX_PATH})
 
 include_directories(${gtest_INCLUDE_DIRS})
 target_link_libraries(${PROJECT_NAME} PRIVATE gtest)
+
+find_package(Qt5 CONFIG REQUIRED COMPONENTS Widgets Charts)
+target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Widgets Qt5::Charts)
