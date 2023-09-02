@@ -6,7 +6,7 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
@@ -40,8 +40,15 @@ else()
     else()
         add_executable(DDietTracker
             ${PROJECT_SOURCES}
-            tst_size_unc.cpp
-
+            product.h product.cpp
+            productcategory.h productcategory.cpp
+            productserializer.h productserializer.cpp
+            abstract_serializer.h abstract_serializer.cpp
+            productdeserializer.h productdeserializer.cpp
+            abstract_deserializer.h abstract_deserializer.cpp
+            productcreator.h productcreator.cpp
+            ddt.h ddt.cpp
+            allproductsbase.h allproductsbase.cpp
 
         )
     endif()
@@ -87,3 +94,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE gtest)
 
 find_package(Qt5 CONFIG REQUIRED COMPONENTS Widgets Charts)
 target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Widgets Qt5::Charts)
+
+find_package(Qt5 CONFIG REQUIRED COMPONENTS Test)
+enable_testing(true)
+target_link_libraries(${PROJECT_NAME} PRIVATE Qt::Test)

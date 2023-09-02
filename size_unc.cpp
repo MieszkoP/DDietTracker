@@ -45,7 +45,7 @@ std::istream &operator>>(std::istream& istr, const size_unc& obj)
 
 bool size_unc::operator==(const size_unc& other) const
 {
-    return _size<=other.GetUpperBound() && _size>=other.GetLowerBound();
+    return (_size==other._size && _unc==other._unc);
 };
 
 bool size_unc::operator>(const size_unc& other) const
@@ -76,4 +76,9 @@ bool size_unc::operator!=(const size_unc& other) const
 float size_unc::GetValue() const
 {
     return _size;
+}
+
+float size_unc::GetUncertainty() const
+{
+    return _unc;
 }

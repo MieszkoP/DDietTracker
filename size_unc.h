@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <cmath>
+#include <optional>
 
 class size_unc
 {
@@ -50,6 +51,8 @@ public:
     bool operator!=(const size_unc& other) const;
 
     float GetValue() const;
+    float GetUncertainty() const;
+
 
 };
 
