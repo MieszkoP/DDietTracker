@@ -18,7 +18,7 @@ public:
     std::optional<size_unc> _proteins;
     std::optional<size_unc> _carbons;
     std::optional<size_unc> _fats;
-    std::optional<size_unc> _quantity; // Used for macronutrient calculations [g\ml]
+    std::optional<size_unc> _quantity = 100; // Used for macronutrient calculations [g\ml]
     std::optional<size_unc> _standard_quantity; // Estimation of the standard amount consumed [g\ml]
     std::string _name = "None";
     bool operator==(const Product& other) const = default;

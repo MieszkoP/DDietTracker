@@ -34,24 +34,24 @@ void ProductCreator::SetKcaloriesPerQuantity(size_unc kcalories)
     _product._kcalories = kcalories;
 }
 
-void ProductCreator::SetProteinsPerQuantity(size_unc kcalories)
+void ProductCreator::SetProteinsPerQuantity(size_unc proteins)
 {
-    _product._kcalories = kcalories;
+    _product._proteins = proteins;
 }
 
-void ProductCreator::SetCarbonsPerQuantity(size_unc kcalories)
+void ProductCreator::SetCarbonsPerQuantity(size_unc carbons)
 {
-    _product._kcalories = kcalories;
+    _product._carbons = carbons;
 }
 
-void ProductCreator::SetFatsPerQuantity(size_unc kcalories)
+void ProductCreator::SetFatsPerQuantity(size_unc fats)
 {
-    _product._kcalories = kcalories;
+    _product._fats = fats;
 }
 
-void ProductCreator::SetStandardQuantity(size_unc kcalories)
+void ProductCreator::SetStandardQuantity(size_unc standard_quantity)
 {
-    _product._kcalories = kcalories;
+    _product._standard_quantity = standard_quantity;
 }
 
 void ProductCreator::SetThreeMacros(size_unc fats, size_unc carbons, size_unc proteins)
@@ -66,9 +66,10 @@ void ProductCreator::CalculateMissing()
 {
     if(!_product._kcalories.has_value())
     {
-        _product._kcalories = 4*(_product._carbons.value()+_product._proteins.value())+8*_product._fats.value();
-    }
 
+        _product._kcalories = 4*(_product._carbons.value()+_product._proteins.value())+8*_product._fats.value();
+
+    }
 }
 
 Product ProductCreator::Result()

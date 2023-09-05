@@ -49,6 +49,18 @@ else()
             productcreator.h productcreator.cpp
             ddt.h ddt.cpp
             allproductsbase.h allproductsbase.cpp
+            apbaseserializer.h apbaseserializer.cpp
+            apbasedeserializer.h apbasedeserializer.cpp
+            eatenproduct.h eatenproduct.cpp
+            eatenday.h eatenday.cpp
+            eatenproductserializer.h eatenproductserializer.cpp
+            eatenproductdeserializer.h eatenproductdeserializer.cpp
+            eatendayserializer.h eatendayserializer.cpp
+            eatendaydeserializer.h eatendaydeserializer.cpp
+            chartkcalories.h chartkcalories.cpp
+            chartkcaloriescreator.h chartkcaloriescreator.cpp
+            daytable.h daytable.cpp
+            createdaytable.h createdaytable.cpp
 
         )
     endif()

@@ -1,9 +1,9 @@
 #ifndef PRODUCTSERIALIZER_H
 #define PRODUCTSERIALIZER_H
 #include <jsoncpp/json/json.h>
-#include "product.h"
-#include <fstream>
 #include "abstract_serializer.h"
+#include <fstream>
+#include "product.h"
 
 //Serialization here works like this: object -> json::value -> file
 

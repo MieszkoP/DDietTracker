@@ -12,6 +12,7 @@ void ProductSerializer::ObjectToRoot(const Product& product)
     opt2_type opttval = DDT::OptionToValueAsString;
     opt2_type opttunc = DDT::OptionToUncertaintyAsString;
 
+    (*_root)["name"] = product._name;
     (*_root)["carbons"]["value"] = opttval(product._carbons);
     (*_root)["kcalories"]["value"] = opttval(product._kcalories);
     (*_root)["proteins"]["value"] = opttval(product._proteins);

@@ -11,6 +11,7 @@ void ProductDeserializer::RootToObject(Product& product)
     typedef std::optional<size_unc>(*type_conv)(std::string, std::string);
     type_conv stringtopt = DDT::StringToProductOption;
 
+    product._name = (*_root)["name"].asString();
     product._carbons = stringtopt((*_root)["carbons"]["value"].asString(), (*_root)["carbons"]["uncertainty"].asString());
     product._kcalories = stringtopt((*_root)["kcalories"]["value"].asString(), (*_root)["kcalories"]["uncertainty"].asString());
     product._proteins = stringtopt((*_root)["proteins"]["value"].asString(), (*_root)["proteins"]["uncertainty"].asString());

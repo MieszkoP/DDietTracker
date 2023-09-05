@@ -30,6 +30,19 @@ public:
 
     };
 
+    size_unc& operator=(std::initializer_list<float> input)
+    {
+        _size = *(input.begin());
+        _unc = *(input.begin()+1);
+        return *this;
+    };
+
+    size_unc(std::initializer_list<float> input)
+    {
+        _size = *(input.begin());
+        _unc = *(input.begin()+1);
+    };
+
     friend std::ostream& operator<<(std::ostream& ostr, const size_unc& obj);
     friend std::istream &operator>>(std::istream& istr, const size_unc& obj);
 
