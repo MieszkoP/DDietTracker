@@ -6,7 +6,7 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
@@ -17,6 +17,8 @@ set(PROJECT_SOURCES
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
+        size_unc.cpp
+        size_unc.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -38,6 +40,33 @@ else()
     else()
         add_executable(DDietTracker
             ${PROJECT_SOURCES}
+            product.h product.cpp
+            productcategory.h productcategory.cpp
+            productserializer.h productserializer.cpp
+            abstract_serializer.h abstract_serializer.cpp
+            productdeserializer.h productdeserializer.cpp
+            abstract_deserializer.h abstract_deserializer.cpp
+            productcreator.h productcreator.cpp
+            ddt.h ddt.cpp
+            allproductsbase.h allproductsbase.cpp
+            apbaseserializer.h apbaseserializer.cpp
+            apbasedeserializer.h apbasedeserializer.cpp
+            eatenproduct.h eatenproduct.cpp
+            eatenday.h eatenday.cpp
+            eatenproductserializer.h eatenproductserializer.cpp
+            eatenproductdeserializer.h eatenproductdeserializer.cpp
+            eatendayserializer.h eatendayserializer.cpp
+            eatendaydeserializer.h eatendaydeserializer.cpp
+
+            chartkcaloriescreator.h chartkcaloriescreator.cpp
+            daytable.h daytable.cpp
+
+            allproductstable.h allproductstable.cpp
+            abstracttable.h abstracttable.cpp
+
+            addeatenproductwindow.h addeatenproductwindow.cpp addeatenproductwindow.ui
+            addtobasewindow.h addtobasewindow.cpp addtobasewindow.ui
+
         )
     endif()
 endif()
@@ -68,3 +97,21 @@ install(TARGETS DDietTracker
 if(QT_VERSION_MAJOR EQUAL 6)
     qt_finalize_executable(DDietTracker)
 endif()
+
+set(CMAKE_PREFIX_PATH "~/vcpkg/packages/jsoncpp_x64-linux" ${CMAKE_PREFIX_PATH})
+
+find_package(jsoncpp CONFIG REQUIRED)
+include_directories(${jsoncpp_INCLUDE_DIRS})
+target_link_libraries(${PROJECT_NAME} PRIVATE JsonCpp::JsonCpp)
+
+set(CMAKE_PREFIX_PATH "/usr/src/gtest" ${CMAKE_PREFIX_PATH})
+
+include_directories(${gtest_INCLUDE_DIRS})
+target_link_libraries(${PROJECT_NAME} PRIVATE gtest)
+
+find_package(Qt5 CONFIG REQUIRED COMPONENTS Widgets Charts)
+target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Widgets Qt5::Charts)
+
+find_package(Qt5 CONFIG REQUIRED COMPONENTS Test)
+enable_testing(true)
+target_link_libraries(${PROJECT_NAME} PRIVATE Qt::Test)
