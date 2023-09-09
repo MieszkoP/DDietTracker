@@ -4,7 +4,7 @@ A desktop application for counting calories and nutrients.
 ## How to download application?
 Go to website - 
 
-## How to compile app?
+## How to compile app from source code?
 The dependencies needed include:
 Qt
 Cmake
