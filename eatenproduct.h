@@ -1,6 +1,6 @@
 #ifndef EATENPRODUCT_H
 #define EATENPRODUCT_H
-#include "product.h";
+#include "product.h"
 #include <chrono>
 
 inline bool operator==(std::optional<std::chrono::hh_mm_ss< std::chrono::minutes>> time1, std::optional<std::chrono::hh_mm_ss< std::chrono::minutes>> time2)

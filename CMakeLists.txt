@@ -104,14 +104,5 @@ find_package(jsoncpp CONFIG REQUIRED)
 include_directories(${jsoncpp_INCLUDE_DIRS})
 target_link_libraries(${PROJECT_NAME} PRIVATE JsonCpp::JsonCpp)
 
-set(CMAKE_PREFIX_PATH "/usr/src/gtest" ${CMAKE_PREFIX_PATH})
-
-include_directories(${gtest_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME} PRIVATE gtest)
-
 find_package(Qt5 CONFIG REQUIRED COMPONENTS Widgets Charts)
 target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Widgets Qt5::Charts)
-
-find_package(Qt5 CONFIG REQUIRED COMPONENTS Test)
-enable_testing(true)
-target_link_libraries(${PROJECT_NAME} PRIVATE Qt::Test)

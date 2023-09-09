@@ -17,12 +17,12 @@ void EatenDay::RemoveEatenProduct(size_t index)
 
 EatenProduct& EatenDay::ReturnEatenProduct(size_t index)
 {
-    *(_eatenProducts.begin()+index);
+    return *(_eatenProducts.begin()+index);
 }
 
 size_t EatenDay::Size() const
 {
-    _eatenProducts.size();
+    return _eatenProducts.size();
 }
 
 size_unc EatenDay::SumCalories()
@@ -78,7 +78,7 @@ void EatenDay::SortByTime()
 
 std::ostream& operator<<(std::ostream& os, const EatenDay& other)
 {
-    os<<"EatenProduct with "<<other.Size()<<" elements.";
+    return os<<"EatenProduct with "<<other.Size()<<" elements.";
 }
 
 void EatenDay::Clean()
