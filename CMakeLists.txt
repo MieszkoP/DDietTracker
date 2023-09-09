@@ -57,10 +57,10 @@ else()
             eatenproductdeserializer.h eatenproductdeserializer.cpp
             eatendayserializer.h eatendayserializer.cpp
             eatendaydeserializer.h eatendaydeserializer.cpp
-            chartkcalories.h chartkcalories.cpp
+
             chartkcaloriescreator.h chartkcaloriescreator.cpp
             daytable.h daytable.cpp
-            createdaytable.h createdaytable.cpp
+
             allproductstable.h allproductstable.cpp
             abstracttable.h abstracttable.cpp
 

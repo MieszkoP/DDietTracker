@@ -48,3 +48,8 @@ void AllProductsTable::Reload()
         _model->appendRow(row);
     }
 }
+
+AllProductsTable::~AllProductsTable()
+{
+    delete _model;
+}

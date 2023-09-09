@@ -33,6 +33,8 @@ void DayTable::LoadEatenDay(std::shared_ptr<EatenDay> eatenDay)
 
 void DayTable::Reload()
 {
+    _model->clear();
+
     _model->setColumnCount(10);
     _model->setHorizontalHeaderItem(0, new QStandardItem("Category"));
     _model->setHorizontalHeaderItem(1, new QStandardItem("Name"));
@@ -44,8 +46,6 @@ void DayTable::Reload()
     _model->setHorizontalHeaderItem(7, new QStandardItem("Day"));
     _model->setHorizontalHeaderItem(8, new QStandardItem("Time"));
     _model->setHorizontalHeaderItem(9, new QStandardItem("Type"));
-
-    _model->clear();
 
     for(int i = 0; i<(*_eatenDay).Size(); i++)
     {

@@ -6,7 +6,6 @@ AddEatenProductWindow::AddEatenProductWindow(QWidget *parent) :
     ui(new Ui::AddEatenProductWindow)
 {
     ui->setupUi(this);
-    //_choosenCategory = new ProductCategory();
     _products = AllProductsBase::GetInstance();
     int i = 0;
     for (auto category: *(_products->GetCategoriesMap()))

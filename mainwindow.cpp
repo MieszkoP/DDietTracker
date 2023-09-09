@@ -161,6 +161,7 @@ void MainWindow::on_DeleteButton_2_pressed()
     std::string product = ui->tableView_2->model()->data(index).toString().toStdString();
     products->DeleteProduct(product);
     _allProductsTable->Reload();
+    ui->DeleteButton_2->setEnabled(false);
 }
 
 
@@ -180,6 +181,7 @@ void MainWindow::on_DeleteButton_pressed()
         _chartView->show();
     }
     _dayTable->Reload();
+    ui->DeleteButton->setEnabled(false);
 }
 
 
