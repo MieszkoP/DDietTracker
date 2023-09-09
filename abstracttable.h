@@ -15,10 +15,13 @@ protected:
     static void AddElementToRow(QList<QStandardItem*>& list, const std::optional<std::chrono::year_month_day>& thing);
     static void AddElementToRow(QList<QStandardItem*>& list, const std::optional<std::chrono::hh_mm_ss< std::chrono::minutes>>& thing);
     static void AddElementToRow(QList<QStandardItem*>& list, const QuantityType& thing);
+signals:
+    void isUpdated();
 
 public:
     AbstractTable();
     QTableView* ToView(QTableView* table);
+
 };
 
 #endif // ABSTRACTTABLE_H

@@ -469,7 +469,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab">
        <property name="enabled">
@@ -514,6 +514,41 @@
           </item>
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_2">
+            <item>
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Kcalories: </string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="kcalories_value">
+              <property name="text">
+               <string>0 +/- 0 kcal</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="Line" name="line">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_3">
+              <property name="text">
+               <string>Proteins: </string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="proteins_value">
+              <property name="text">
+               <string>0 +/- 0 g</string>
+              </property>
+             </widget>
+            </item>
             <item>
              <spacer name="horizontalSpacer_2">
               <property name="orientation">

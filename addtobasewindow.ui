@@ -251,7 +251,7 @@
      <item>
       <widget class="QLabel" name="KcaloriesQuantity">
        <property name="text">
-        <string>[g]</string>
+        <string>[g/100g]</string>
        </property>
       </widget>
      </item>

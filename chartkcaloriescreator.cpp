@@ -5,12 +5,12 @@ ChartKcaloriesCreator::ChartKcaloriesCreator()
 {
     _chart = new QChart();
     _axisX->setTickCount(10);
-    _axisX->setFormat("h:m, d.M");
+    _axisX->setFormat("hh:mm, dd.MM");
     _axisX->setTitleText("Date");
     _chart->addAxis(_axisX.get(), Qt::AlignBottom);
 
     _axisY->setLabelFormat("%i");
-    _axisY->setTitleText("Sunspots count");
+    _axisY->setTitleText("Kcalories");
     _chart->addAxis(_axisY.get(), Qt::AlignLeft);
 }
 
@@ -103,6 +103,8 @@ QChart* ChartKcaloriesCreator::createKcalChart(std::shared_ptr<EatenDay> eatenDa
 
     series->attachAxis(_axisX.get());
     series->attachAxis(_axisY.get());
+
+    _chart->legend()->setVisible(false);
 
     return _chart;
 }

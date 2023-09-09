@@ -61,6 +61,22 @@ MainWindow::MainWindow(QWidget *parent)
     }
             );
 
+    connect(_dayTable, &AbstractTable::isUpdated, [&, this]
+    {
+        size_unc proteins = _dayTable->GetEatenDay()->SumProteins();
+        ui->proteins_value->setText(QString::fromStdString(
+            std::to_string(proteins.GetValue()) + "+/-" + std::to_string(proteins.GetUncertainty())
+
+            ));
+
+        size_unc kcalories = _dayTable->GetEatenDay()->SumCalories();
+        ui->kcalories_value->setText(QString::fromStdString(
+            std::to_string(kcalories.GetValue()) + "+/-" + std::to_string(kcalories.GetUncertainty())
+
+            ));
+
+        _dayTable->GetEatenDay()->SumCalories();
+    });
 }
 
 MainWindow::~MainWindow()
@@ -86,6 +102,7 @@ void MainWindow::on_pushButton_2_clicked()
         _chartView->setChart((_chartKcaloriesCreator.createKcalChart(_eatenDay)));
         _chartView->show();
     }
+    ui->DeleteButton->setEnabled(false);
 }
 
 
@@ -97,7 +114,6 @@ void MainWindow::on_pushButton_3_released()
     auto eatenDay = _eatenDay;
     auto chartView = _chartView;
 
-    //connect(eatenProductWindow, &AddEatenProductWindow::SendSignal, _dayTable, &DayTable::Reload);
     connect(eatenProductWindow, &AddEatenProductWindow::SendSignal, [&,this, eatenDay, chartView]() {
         _dayTable->Reload();
         if(_chartViewShowed)
@@ -107,6 +123,7 @@ void MainWindow::on_pushButton_3_released()
             chartView->show();
         }
     });
+    ui->DeleteButton->setEnabled(false);
 }
 
 
@@ -114,6 +131,7 @@ void MainWindow::on_pushButton_5_clicked()
 {
     _eatenDay->Clean();
     _dayTable->Reload();
+    ui->DeleteButton->setEnabled(false);
 
 }
 
@@ -127,7 +145,7 @@ void MainWindow::on_pushButton_4_released()
     connect(addToBaseWindow, &AddToBaseWindow::SendSignal, [&]() {
         _allProductsTable->Reload();
     });
-
+    ui->DeleteButton_2->setEnabled(false);
 }
 
 

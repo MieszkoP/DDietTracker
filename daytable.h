@@ -18,6 +18,7 @@ public:
     void LoadEatenDay(std::shared_ptr<EatenDay> eatenDay);
     std::shared_ptr<EatenDay> GetEatenDay();
     void Reload();
+
 };
 
 #endif // DAYTABLE_H

@@ -46,11 +46,13 @@ void DayTable::Reload()
     _model->setHorizontalHeaderItem(9, new QStandardItem("Type"));
 
     _model->clear();
+
     for(int i = 0; i<(*_eatenDay).Size(); i++)
     {
         QList<QStandardItem*> row = EatenProductToRow(_eatenDay->ReturnEatenProduct(i));
         _model->appendRow(row);
     }
+    isUpdated();
 }
 
 std::shared_ptr<EatenDay> DayTable::GetEatenDay()

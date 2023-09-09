@@ -23,17 +23,11 @@ public:
 
 private slots:
     void on_pushButton_2_clicked();
-
     void on_pushButton_3_released();
-
     void on_pushButton_5_clicked();
-
     void on_pushButton_4_released();
-
     void on_DeleteButton_2_pressed();
-
     void on_DeleteButton_pressed();
-
     void on_SaveButton_clicked();
 
 private:

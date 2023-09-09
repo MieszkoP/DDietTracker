@@ -32,6 +32,7 @@ private:
     Ui::AddToBaseWindow *ui;
     std::string _perQuantityString;
     std::string _quantityString;
+    std::string _perQuantityStringKcal;
 };
 
 #endif // ADDTOBASEWINDOW_H

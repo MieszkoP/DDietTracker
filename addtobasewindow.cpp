@@ -22,7 +22,8 @@ AddToBaseWindow::AddToBaseWindow(QWidget *parent) :
     ui->BaseQuantityUncertainty->setValue(1);
 
     _quantityString = "g";
-    _perQuantityString = "["+_quantityString+"/100"+_quantityString+"]";
+    _perQuantityString = "[g/100"+_quantityString+"]";
+    _perQuantityStringKcal = "[kcal/100"+_quantityString+"]";
 
     //connect(ui->comboBox_2, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &AddToBaseWindow::UpdateLabels);
 
@@ -59,13 +60,14 @@ void AddToBaseWindow::UpdateLabels()
         _quantityString = "g";
     }
 
-    _perQuantityString = "["+_quantityString+"/"+std::to_string(int(ui->BaseQuantityValue->value()))+_quantityString+"]";
+    _perQuantityString = "[g/"+std::to_string(int(ui->BaseQuantityValue->value()))+_quantityString+"]";
+    _perQuantityStringKcal = "[kcal/"+std::to_string(int(ui->BaseQuantityValue->value()))+_quantityString+"]";
 
     ui->BaseQuantityType->setText(QString::fromStdString(_quantityString));
     ui->DefaultQuantityType->setText(QString::fromStdString(_quantityString));
 
 
-    ui->KcaloriesQuantity->setText(QString::fromStdString(_perQuantityString));
+    ui->KcaloriesQuantity->setText(QString::fromStdString(_perQuantityStringKcal));
     ui->ProteinsQuantity->setText(QString::fromStdString(_perQuantityString));
     ui->CarbonsQuantity->setText(QString::fromStdString(_perQuantityString));
     ui->FatsQuantity->setText(QString::fromStdString(_perQuantityString));

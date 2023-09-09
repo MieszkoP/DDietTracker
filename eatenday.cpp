@@ -42,6 +42,7 @@ size_unc EatenDay::SumProteins()
     {
         sum=x.GetProteins()+sum;
     }
+    return sum;
 }
 
 bool EatenDay::CompareByTime(const EatenProduct& a, const EatenProduct& b)
