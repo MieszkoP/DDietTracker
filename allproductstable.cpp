@@ -25,6 +25,12 @@ AllProductsTable::AllProductsTable() : AbstractTable()
     //DDT::LoadProductBase();
     _allProducstBase = AllProductsBase::GetInstance();
 
+    Reload();
+}
+
+void AllProductsTable::Reload()
+{
+    _model->clear();
     _model->setColumnCount(9);
 
     _model->setHorizontalHeaderItem(0, new QStandardItem("Category"));
@@ -36,13 +42,6 @@ AllProductsTable::AllProductsTable() : AbstractTable()
     _model->setHorizontalHeaderItem(6, new QStandardItem("Carbons"));
     _model->setHorizontalHeaderItem(7, new QStandardItem("Kcals"));
     _model->setHorizontalHeaderItem(8, new QStandardItem("Quantity Type"));
-
-    Reload();
-}
-
-void AllProductsTable::Reload()
-{
-    _model->clear();
     for(auto &product : *(_allProducstBase->GetBase()))
     {
         QList<QStandardItem*> row = ProductToRow(product.second);
