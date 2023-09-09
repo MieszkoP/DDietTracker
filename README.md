@@ -12,6 +12,6 @@ Jsoncpp
 
 ## How to create standalone app after compilation?
 ...
-
+ss 
 ## Unit tests
 Unit tests are present in a separate project:
