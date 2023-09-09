@@ -9,3 +9,6 @@ The dependencies needed include:
 Qt
 Cmake
 Jsoncpp
+
+##Unit tests
+Unit tests are present in a separate project:
