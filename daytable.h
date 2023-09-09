@@ -3,26 +3,20 @@
 #include <QTableView>
 #include "eatenday.h"
  #include <QStandardItemModel>
-#include <QHeaderView>>
+#include <QHeaderView>
+#include "abstracttable.h"
 
 #include <memory>
 
-class DayTable
+class DayTable : public AbstractTable
 {
-    QStandardItemModel* _model = nullptr;
-    EatenDay* _eatenDay = nullptr;
+    std::shared_ptr<EatenDay> _eatenDay = std::make_shared<EatenDay>();
     static QList<QStandardItem*> EatenProductToRow(const EatenProduct& eatenProduct);
-    static void AddElementToRow(QList<QStandardItem*>& list, const std::optional<size_unc>& thing);
-    static void AddElementToRow(QList<QStandardItem*>& list, const std::string& thing);
-    static void AddElementToRow(QList<QStandardItem*>& list, const std::optional<std::chrono::year_month_day>& thing);
-    static void AddElementToRow(QList<QStandardItem*>& list, const std::optional<std::chrono::hh_mm_ss< std::chrono::minutes>>& thing);
-    static void AddElementToRow(QList<QStandardItem*>& list, const QuantityType& thing);
 
 public:
     DayTable();
-    void LoadEatenDay(EatenDay& eatenDay);
-    void addProduct(EatenProduct& eatenProduct);
-    QTableView* ToView(QTableView* table);
+    void LoadEatenDay(std::shared_ptr<EatenDay> eatenDay);
+    std::shared_ptr<EatenDay> GetEatenDay();
     void Reload();
 };
 

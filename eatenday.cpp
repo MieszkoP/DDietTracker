@@ -79,3 +79,8 @@ std::ostream& operator<<(std::ostream& os, const EatenDay& other)
 {
     os<<"EatenProduct with "<<other.Size()<<" elements.";
 }
+
+void EatenDay::Clean()
+{
+    _eatenProducts.clear();
+}

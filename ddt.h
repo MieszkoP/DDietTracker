@@ -25,6 +25,8 @@ public:
     static std::optional<std::chrono::year_month_day> StringToDateOption(std::string date);
     static std::string DateOptionAsString(std::optional<std::chrono::year_month_day> date);
     static std::string TimeOptionAsString(std::optional<std::chrono::hh_mm_ss< std::chrono::minutes>> time);
+    static void LoadProductBase();
+    static void UpdateProductBase();
 };
 
 #endif // DDT_H

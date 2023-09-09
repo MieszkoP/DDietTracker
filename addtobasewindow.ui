@@ -1,0 +1,569 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AddToBaseWindow</class>
+ <widget class="QDialog" name="AddToBaseWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>968</width>
+    <height>507</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <layout class="QHBoxLayout" name="QuantityLayout_10">
+     <item>
+      <widget class="QLabel" name="label_30">
+       <property name="text">
+        <string>Quantity Type:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_13">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QComboBox" name="comboBox_2"/>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="QuantityLayout_8">
+     <item>
+      <widget class="QLabel" name="label_25">
+       <property name="text">
+        <string>Name: </string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_11">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="EditName"/>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="QuantityLayout_9">
+     <item>
+      <widget class="QLabel" name="label_28">
+       <property name="text">
+        <string>Category: </string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_12">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QComboBox" name="comboBoxCategory"/>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_29">
+       <property name="text">
+        <string>Add New:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="EditCategory">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="QuantityLayout_2">
+     <item>
+      <widget class="QLabel" name="label_7">
+       <property name="text">
+        <string>Quantity (corresponding to the macronutrients given below)</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="BaseQuantityType">
+       <property name="text">
+        <string>[g]</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_4">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_8">
+       <property name="text">
+        <string>Value:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QDoubleSpinBox" name="BaseQuantityValue">
+       <property name="decimals">
+        <number>2</number>
+       </property>
+       <property name="maximum">
+        <double>10000.000000000000000</double>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_9">
+       <property name="text">
+        <string>Uncertainty: </string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QDoubleSpinBox" name="BaseQuantityUncertainty">
+       <property name="decimals">
+        <number>2</number>
+       </property>
+       <property name="maximum">
+        <double>10000.000000000000000</double>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="QuantityLayout_3">
+     <item>
+      <widget class="QLabel" name="label_10">
+       <property name="text">
+        <string>Default Quantity </string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="DefaultQuantityType">
+       <property name="text">
+        <string>[g]</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_5">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_11">
+       <property name="text">
+        <string>Value:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QDoubleSpinBox" name="DefaultQuantityValue">
+       <property name="decimals">
+        <number>2</number>
+       </property>
+       <property name="maximum">
+        <double>10000.000000000000000</double>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_12">
+       <property name="text">
+        <string>Uncertainty: </string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QDoubleSpinBox" name="DefaultQuantityUncertainty">
+       <property name="decimals">
+        <number>2</number>
+       </property>
+       <property name="maximum">
+        <double>10000.000000000000000</double>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="QuantityLayout_4">
+     <item>
+      <widget class="QLabel" name="label_13">
+       <property name="text">
+        <string>Kcalories</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="KcaloriesQuantity">
+       <property name="text">
+        <string>[g]</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_7">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_14">
+       <property name="text">
+        <string>Value:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QDoubleSpinBox" name="KcaloriesValue">
+       <property name="decimals">
+        <number>2</number>
+       </property>
+       <property name="maximum">
+        <double>10000.000000000000000</double>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_15">
+       <property name="text">
+        <string>Uncertainty: </string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QDoubleSpinBox" name="KcaloriesUncertainty">
+       <property name="decimals">
+        <number>2</number>
+       </property>
+       <property name="maximum">
+        <double>10000.000000000000000</double>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="QuantityLayout_5">
+     <item>
+      <widget class="QLabel" name="label_16">
+       <property name="text">
+        <string>Proteins</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="ProteinsQuantity">
+       <property name="text">
+        <string>[g/100g]</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_8">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_17">
+       <property name="text">
+        <string>Value:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QDoubleSpinBox" name="ProteinsValue">
+       <property name="decimals">
+        <number>2</number>
+       </property>
+       <property name="maximum">
+        <double>10000.000000000000000</double>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_18">
+       <property name="text">
+        <string>Uncertainty: </string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QDoubleSpinBox" name="ProteinsUncertainty">
+       <property name="decimals">
+        <number>2</number>
+       </property>
+       <property name="maximum">
+        <double>10000.000000000000000</double>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="QuantityLayout_6">
+     <item>
+      <widget class="QLabel" name="label_19">
+       <property name="text">
+        <string>Fats</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="FatsQuantity">
+       <property name="text">
+        <string>[g/100g]</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_9">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_20">
+       <property name="text">
+        <string>Value:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QDoubleSpinBox" name="FatsValue">
+       <property name="decimals">
+        <number>2</number>
+       </property>
+       <property name="maximum">
+        <double>10000.000000000000000</double>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_21">
+       <property name="text">
+        <string>Uncertainty: </string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QDoubleSpinBox" name="FatsUncertainty">
+       <property name="decimals">
+        <number>2</number>
+       </property>
+       <property name="maximum">
+        <double>10000.000000000000000</double>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="QuantityLayout_7">
+     <item>
+      <widget class="QLabel" name="label_22">
+       <property name="text">
+        <string>Carbons</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="CarbonsQuantity">
+       <property name="text">
+        <string>[g/100g]</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_10">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_23">
+       <property name="text">
+        <string>Value:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QDoubleSpinBox" name="CarbonsValue">
+       <property name="decimals">
+        <number>2</number>
+       </property>
+       <property name="maximum">
+        <double>10000.000000000000000</double>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_24">
+       <property name="text">
+        <string>Uncertainty: </string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QDoubleSpinBox" name="CarbonsUncertainty">
+       <property name="decimals">
+        <number>2</number>
+       </property>
+       <property name="maximum">
+        <double>10000.000000000000000</double>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="Line" name="line">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>143</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>AddToBaseWindow</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>248</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>AddToBaseWindow</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>316</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

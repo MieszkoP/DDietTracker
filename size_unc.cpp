@@ -13,7 +13,7 @@ size_unc operator-(const size_unc &n1, const size_unc &n2)
 size_unc operator*(const size_unc &n1, const size_unc &n2)
 {
     float z = n1._size*n2._size;
-    return size_unc(z, z*std::hypot(n1._unc/n1._size, n2._unc/n2._size));
+    return size_unc(z, std::hypot(n1._unc*n2._size, n2._unc*n1._size));
 };
 
 size_unc operator/(const size_unc &n1, const size_unc &n2)

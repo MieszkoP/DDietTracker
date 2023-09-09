@@ -4,7 +4,7 @@
 #include "productcategory.h"
 #include <optional>
 
-enum class QuantityType {velocity, mass};
+enum class QuantityType {volume, mass};
 
 //The Product class is a data entity that describes a registered product. It is not a unit of product consumed.
 class Product

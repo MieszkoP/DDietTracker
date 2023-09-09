@@ -469,7 +469,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab">
        <property name="enabled">
@@ -504,6 +504,9 @@
             <property name="showGrid">
              <bool>true</bool>
             </property>
+            <property name="gridStyle">
+             <enum>Qt::SolidLine</enum>
+            </property>
             <property name="sortingEnabled">
              <bool>false</bool>
             </property>
@@ -523,6 +526,23 @@
                </size>
               </property>
              </spacer>
+            </item>
+            <item>
+             <widget class="QPushButton" name="DeleteButton">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="text">
+               <string>Delete</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton_5">
+              <property name="text">
+               <string>Clean</string>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QPushButton" name="pushButton_2">
@@ -567,6 +587,56 @@
        <attribute name="title">
         <string>Products</string>
        </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <item>
+         <widget class="QTableView" name="tableView_2">
+          <property name="sortingEnabled">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <item>
+           <spacer name="horizontalSpacer_3">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="SaveButton">
+            <property name="text">
+             <string>Save</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="DeleteButton_2">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="text">
+             <string>Delete</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_4">
+            <property name="text">
+             <string>Add Product to Base</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
       </widget>
      </widget>
     </item>
@@ -609,5 +679,22 @@
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>848</x>
+     <y>520</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>703</x>
+     <y>513</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

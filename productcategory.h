@@ -10,4 +10,13 @@ public:
     bool operator==(const ProductCategory& other) const = default;
 };
 
+template <>
+struct std::hash<ProductCategory>
+{
+    std::size_t operator()(const ProductCategory& category) const
+    {
+        return ((hash<std::string>()(category._name)));
+    }
+};
+
 #endif // PRODUCTCATEGORY_H

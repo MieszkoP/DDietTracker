@@ -61,6 +61,11 @@ else()
             chartkcaloriescreator.h chartkcaloriescreator.cpp
             daytable.h daytable.cpp
             createdaytable.h createdaytable.cpp
+            allproductstable.h allproductstable.cpp
+            abstracttable.h abstracttable.cpp
+
+            addeatenproductwindow.h addeatenproductwindow.cpp addeatenproductwindow.ui
+            addtobasewindow.h addtobasewindow.cpp addtobasewindow.ui
 
         )
     endif()

@@ -1,6 +1,12 @@
 #include "ddt.h"
 #include <chrono>
 #include <regex>
+#include <filesystem>
+#include "allproductsbase.h"
+#include <json/json.h>
+#include "apbaseserializer.h"
+#include "apbasedeserializer.h"
+#include <QDebug>
 
 DDT* DDT::_ddt = nullptr;
 
@@ -131,4 +137,70 @@ std::string DDT::TimeOptionAsString(std::optional<std::chrono::hh_mm_ss< std::ch
     {
         return "None";
     }
+}
+
+void DDT::LoadProductBase()
+{
+    auto products = AllProductsBase::GetInstance();
+    products->ClearBase();
+
+    if(!std::filesystem::exists("product_base.json"))
+    {
+        Product product1("Onion");
+        Product product2("Carrot");
+        Product product3("Water");
+
+        auto products = AllProductsBase::GetInstance();
+
+        product1._kcalories = {39, 1};
+        product1._productCategory._name = "Vegetable";
+        product1._carbons={9, 1};
+        product1._proteins={1.1, 0.1};
+        product1._fats={0.1, 0};
+        product1._standard_quantity = 100;
+
+        product2._kcalories = {41, 1};
+        product2._productCategory._name = "Vegetable";
+        product2._carbons={10, 1};
+        product2._proteins={1, 1};
+        product2._fats={0, 0};
+        product2._standard_quantity = 100;
+
+        product3._kcalories = {0, 0};
+        product3._productCategory._name = "Drink";
+        product3._carbons={0, 0};
+        product3._proteins={0, 0};
+        product3._fats={0, 0};
+        product3._standard_quantity = 100;
+
+        products->AddProduct(product1);
+        products->AddProduct(product2);
+        products->AddProduct(product3);
+
+        Json::Value root;
+        APBaseSerializer apbkserializer(root);
+        apbkserializer.ObjectToRoot(products);
+        std::ofstream file("product_base.json");
+        file << root;
+        file.close();
+    }
+    products->ClearBase();
+    std::ifstream file2("product_base.json");
+    Json::Value root2;
+    APBaseDeserializer deserializer(root2);
+    deserializer.FileToRoot(file2);
+    deserializer.RootToObject(products);
+    file2.close();
+
+}
+
+void DDT::UpdateProductBase()
+{
+    auto products = AllProductsBase::GetInstance();
+    Json::Value root;
+    APBaseSerializer apbkserializer(root);
+    apbkserializer.ObjectToRoot(products);
+    std::ofstream file("product_base.json");
+    file << root;
+    file.close();
 }

@@ -16,6 +16,7 @@ public:
 
     size_unc SumCalories();
     size_unc SumProteins();
+    void Clean();
 
     //size_unc SumCaloriesBefore();
     //size_unc SumProteinsBefore();
