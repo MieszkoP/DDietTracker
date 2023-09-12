@@ -44,4 +44,4 @@ This means you can't use Ubuntu 22.04, but you can use Ubuntu 20.04.
 
 ## Unit tests
 Unit tests are present in a separate project.
-
+[DDietTracker Tests](https://github.com/MieszkoP/DDietTrackerUnitTests)
