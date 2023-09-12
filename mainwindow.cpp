@@ -33,7 +33,6 @@ MainWindow::MainWindow(QWidget *parent)
     {
         if(selected.empty())
         {
-            idSelectedInEaten = -1;
             ui->DeleteButton->setEnabled(false);
         }
         else
@@ -49,7 +48,6 @@ MainWindow::MainWindow(QWidget *parent)
     {
         if(selected.empty())
         {
-            idSelectedInBase = -1;
             ui->DeleteButton_2->setEnabled(false);
         }
         else
@@ -152,11 +150,6 @@ void MainWindow::on_pushButton_4_released()
 void MainWindow::on_DeleteButton_2_pressed()
 {
     auto products = AllProductsBase::GetInstance();
-    if(idSelectedInBase==-1)
-    {
-        QMessageBox::warning(this, "Not product chosen.", "No product chosen");
-        return;
-    }
     auto index = ui->tableView_2->model()->index(idSelectedInBase, 1);
     std::string product = ui->tableView_2->model()->data(index).toString().toStdString();
     products->DeleteProduct(product);
@@ -167,13 +160,8 @@ void MainWindow::on_DeleteButton_2_pressed()
 
 void MainWindow::on_DeleteButton_pressed()
 {
-    if(idSelectedInEaten==-1)
-    {
-        QMessageBox::warning(this, "Not product chosen.", "No product chosen");
-        return;
-    }
 
-    _eatenDay->RemoveEatenProduct(idSelectedInBase);
+    _eatenDay->RemoveEatenProduct(idSelectedInEaten);
     if(_chartViewShowed)
     {
         _eatenDay->SortByTime();
