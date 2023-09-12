@@ -20,7 +20,6 @@ QList<QStandardItem*> DayTable::EatenProductToRow(const EatenProduct& eatenProdu
 
 DayTable::DayTable() : AbstractTable()
 {
-    _model = new QStandardItemModel();
 
     Reload();
 

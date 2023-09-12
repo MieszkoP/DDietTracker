@@ -10,7 +10,6 @@ class AllProductsTable : public AbstractTable
 public:
     AllProductsTable();
     void Reload();
-    ~AllProductsTable();
 };
 
 #endif // ALLPRODUCTSTABLE_H

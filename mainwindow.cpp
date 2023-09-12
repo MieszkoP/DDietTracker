@@ -80,6 +80,8 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete _dayTable;
+    delete _allProductsTable;
 }
 
 

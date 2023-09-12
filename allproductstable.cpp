@@ -21,7 +21,6 @@ QList<QStandardItem*> AllProductsTable::ProductToRow(const Product& product)
 
 AllProductsTable::AllProductsTable() : AbstractTable()
 {
-    _model = new QStandardItemModel();
     //DDT::LoadProductBase();
     _allProducstBase = AllProductsBase::GetInstance();
 
@@ -49,7 +48,3 @@ void AllProductsTable::Reload()
     }
 }
 
-AllProductsTable::~AllProductsTable()
-{
-    delete _model;
-}

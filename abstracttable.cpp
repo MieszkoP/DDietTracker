@@ -63,3 +63,7 @@ QTableView* AbstractTable::ToView(QTableView* tableView)
     return tableView;
 }
 
+AbstractTable::~AbstractTable()
+{
+    delete _model;
+}

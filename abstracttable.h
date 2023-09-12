@@ -21,6 +21,7 @@ signals:
 public:
     AbstractTable();
     QTableView* ToView(QTableView* table);
+    ~AbstractTable();
 
 };
 
