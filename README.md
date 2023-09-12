@@ -1,5 +1,7 @@
 # DDietTracker Desktop Diet Tracker
 A desktop application for counting calories and nutrients.
+![Zrzut ekranu z 2023-09-13 01-40-29](https://github.com/MieszkoP/DDietTracker/assets/78937784/b834fad8-cf7e-4543-9133-caae05fe689a)
+
 
 ## How to download application? (Linux only)
 Go to link - https://drive.google.com/drive/folders/1S50IIiUawC67S_nicYw3XFzsEaP3zWvk?usp=drive_link
