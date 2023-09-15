@@ -2,10 +2,7 @@
 #include "ddt.h"
 #include <QHeaderView>
 
-AbstractTable::AbstractTable()
-{
-    _model = new QStandardItemModel();
-}
+AbstractTable::AbstractTable() : _model(new QStandardItemModel()) {}
 
 void AbstractTable::AddElementToRow(QList<QStandardItem*>& list, const std::optional<size_unc>& thing)
 {

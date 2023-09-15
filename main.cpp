@@ -14,5 +14,5 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.setWindowTitle("Desktop Diet Tracker v. 0.0.1");
     w.show();
-    return a.exec();
+    return QApplication::exec();
 }

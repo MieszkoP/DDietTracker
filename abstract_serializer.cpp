@@ -2,14 +2,14 @@
 
 AbstractSerializer::AbstractSerializer(Json::Value& root) : _root{&root} {};
 
-void AbstractSerializer::RootToFile(const std::string_view& filename)
+void AbstractSerializer::RootToFile(const std::string_view& filename) const
 {
     std::ofstream file(filename.data());
     file << (*_root);
     file.close();
 }
 
-void AbstractSerializer::RootToFile(std::ofstream& file)
+void AbstractSerializer::RootToFile(std::ofstream& file) const
 {
     if(file.is_open())
     {

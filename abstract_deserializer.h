@@ -7,9 +7,9 @@
 class AbstractDeserializer
 {
 protected:
-    Json::Value* _root;
+    Json::Value* _root; //Will be encapsulated in the future
 public:
-    AbstractDeserializer(Json::Value& root);
+    explicit AbstractDeserializer(Json::Value& root);
     void FileToRoot(const std::string_view& filename);
     void FileToRoot(std::ifstream& file);
     Json::Value& GetRoot();

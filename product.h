@@ -11,7 +11,7 @@ class Product
 {
 public:
     Product() = default;
-    Product(std::string name);
+    explicit Product(const std::string& name);
     QuantityType _quantityType = QuantityType::mass;
     ProductCategory _productCategory;
     std::optional<size_unc> _kcalories;

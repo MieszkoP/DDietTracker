@@ -6,11 +6,11 @@
 class AbstractSerializer
 {
 protected:
-    Json::Value* _root;
+    Json::Value* _root; //encapsulation will be implemented in future
 public:
-    AbstractSerializer(Json::Value& root);
-    void RootToFile(const std::string_view& filename);
-    void RootToFile(std::ofstream& file);
+    explicit AbstractSerializer(Json::Value& root);
+    void RootToFile(const std::string_view& filename) const;
+    void RootToFile(std::ofstream& file) const;
     Json::Value& GetRoot();
 };
 

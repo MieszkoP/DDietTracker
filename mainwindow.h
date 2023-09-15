@@ -18,8 +18,8 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    explicit MainWindow(QWidget *parent = nullptr);
+    ~MainWindow() final;
 
 private slots:
     void on_pushButton_2_clicked();
@@ -32,12 +32,12 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    DayTable* _dayTable = nullptr;
+    DayTable* _dayTable = new DayTable();
     AllProductsTable* _allProductsTable = nullptr;
     std::shared_ptr<EatenDay> _eatenDay = std::make_shared<EatenDay>();
     QChartView *_chartView = nullptr;
     bool _chartViewShowed = false;
-    ChartKcaloriesCreator _chartKcaloriesCreator;
+    ChartKcaloriesCreator _chartKcaloriesCreator = ChartKcaloriesCreator();
     size_t idSelectedInBase = -1;
     size_t idSelectedInEaten = -1;
 };

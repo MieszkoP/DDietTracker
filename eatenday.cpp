@@ -1,11 +1,7 @@
 #include "eatenday.h"
+#include <algorithm>
 
-EatenDay::EatenDay()
-{
-
-}
-
-void EatenDay::AddEatenProduct(EatenProduct eatenProduct)
+void EatenDay::AddEatenProduct(const EatenProduct& eatenProduct)
 {
     _eatenProducts.push_back(eatenProduct);
 }
@@ -25,20 +21,20 @@ size_t EatenDay::Size() const
     return _eatenProducts.size();
 }
 
-size_unc EatenDay::SumCalories()
+size_unc EatenDay::SumCalories() const
 {
     size_unc sum = 0;
-    for(auto x : _eatenProducts)
+    for(const auto& x : _eatenProducts)
     {
         sum=x.GetKcalories()+sum;
     }
     return sum;
 }
 
-size_unc EatenDay::SumProteins()
+size_unc EatenDay::SumProteins() const
 {
     size_unc sum = 0;
-    for(auto x : _eatenProducts)
+    for(const auto& x : _eatenProducts)
     {
         sum=x.GetProteins()+sum;
     }
@@ -73,7 +69,7 @@ bool EatenDay::CompareByTime(const EatenProduct& a, const EatenProduct& b)
 void EatenDay::SortByTime()
 {
     //returns ​true if the first argument is less than (i.e. is ordered before) the second.
-    std::sort(_eatenProducts.begin(), _eatenProducts.end(), EatenDay::CompareByTime);
+    std::ranges::sort(_eatenProducts, EatenDay::CompareByTime);
 }
 
 std::ostream& operator<<(std::ostream& os, const EatenDay& other)

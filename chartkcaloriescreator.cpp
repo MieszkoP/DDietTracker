@@ -3,7 +3,6 @@
 
 ChartKcaloriesCreator::ChartKcaloriesCreator()
 {
-    _chart = new QChart();
     _axisX->setTickCount(10);
     _axisX->setFormat("hh:mm, dd.MM");
     _axisX->setTitleText("Date");
@@ -49,7 +48,7 @@ QChart* ChartKcaloriesCreator::createKcalChart(std::shared_ptr<EatenDay> eatenDa
     {
         auto product = _eatenDay->ReturnEatenProduct(i);
         auto added_kcalories = product.GetKcalories().GetValue()+kcalories;
-        auto uncertainty = product.GetKcalories().GetUncertainty();
+        auto uncertainty = product.GetKcalories().GetUncertainty(); //uncertainty in chart will be implemented in future
         QDateTime momentInTime;
         if(product.GetDate().has_value())
         {

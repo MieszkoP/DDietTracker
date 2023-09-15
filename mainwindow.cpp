@@ -9,7 +9,7 @@
 #include <json/json.h>
 #include "apbaseserializer.h"
 
-typedef QPair<QPointF, QString> Data;
+using Data = QPair<QPointF, QString>;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -17,9 +17,6 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    _chartKcaloriesCreator = ChartKcaloriesCreator();
-
-    _dayTable = new DayTable();
     _eatenDay = _dayTable->GetEatenDay();
     _dayTable->LoadEatenDay(_eatenDay);
     _dayTable->ToView(ui->tableView);
@@ -29,7 +26,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     _allProductsTable = new AllProductsTable();
     _allProductsTable->ToView(ui->tableView_2);
-    connect(ui->tableView->selectionModel(), &QItemSelectionModel::selectionChanged, [&, this](const QItemSelection &selected, const QItemSelection &deselected)
+    connect(ui->tableView->selectionModel(), &QItemSelectionModel::selectionChanged, [this] (const QItemSelection &selected,  [[maybe_unused]] const QItemSelection &deselected)
     {
         if(selected.empty())
         {
@@ -44,7 +41,7 @@ MainWindow::MainWindow(QWidget *parent)
     }
             );
 
-    connect(ui->tableView_2->selectionModel(), &QItemSelectionModel::selectionChanged, [&, this](const QItemSelection &selected, const QItemSelection &deselected)
+    connect(ui->tableView_2->selectionModel(), &QItemSelectionModel::selectionChanged, [this] (const QItemSelection &selected, [[maybe_unused]] const QItemSelection &deselected)
     {
         if(selected.empty())
         {
@@ -59,7 +56,7 @@ MainWindow::MainWindow(QWidget *parent)
     }
             );
 
-    connect(_dayTable, &AbstractTable::isUpdated, [&, this]
+    connect(_dayTable, &AbstractTable::isUpdated, [this]
     {
         size_unc proteins = _dayTable->GetEatenDay()->SumProteins();
         ui->proteins_value->setText(QString::fromStdString(
@@ -99,7 +96,7 @@ void MainWindow::on_pushButton_2_clicked()
         ui->pushButton_2->setText("Hide Chart");
         _eatenDay->SortByTime();
         _dayTable->Reload();
-        _chartView->setChart((_chartKcaloriesCreator.createKcalChart(_eatenDay)));
+        _chartView->setChart(_chartKcaloriesCreator.createKcalChart(_eatenDay));
         _chartView->show();
     }
     ui->DeleteButton->setEnabled(false);
@@ -114,12 +111,12 @@ void MainWindow::on_pushButton_3_released()
     auto eatenDay = _eatenDay;
     auto chartView = _chartView;
 
-    connect(eatenProductWindow, &AddEatenProductWindow::SendSignal, [&,this, eatenDay, chartView]() {
+    connect(eatenProductWindow, &AddEatenProductWindow::SendSignal, [this, eatenDay, chartView]() {
         _dayTable->Reload();
         if(_chartViewShowed)
         {
             eatenDay->SortByTime();
-            chartView->setChart((_chartKcaloriesCreator.createKcalChart(_eatenDay)));
+            chartView->setChart(_chartKcaloriesCreator.createKcalChart(_eatenDay));
             chartView->show();
         }
     });
@@ -141,8 +138,7 @@ void MainWindow::on_pushButton_4_released()
     auto addToBaseWindow = new AddToBaseWindow(this);
     addToBaseWindow->show();
 
-    //connect(eatenProductWindow, &AddEatenProductWindow::SendSignal, _dayTable, &DayTable::Reload);
-    connect(addToBaseWindow, &AddToBaseWindow::SendSignal, [&]() {
+    connect(addToBaseWindow, &AddToBaseWindow::SendSignal, [this]() {
         _allProductsTable->Reload();
     });
     ui->DeleteButton_2->setEnabled(false);
@@ -167,7 +163,7 @@ void MainWindow::on_DeleteButton_pressed()
     if(_chartViewShowed)
     {
         _eatenDay->SortByTime();
-        _chartView->setChart((_chartKcaloriesCreator.createKcalChart(_eatenDay)));
+        _chartView->setChart(_chartKcaloriesCreator.createKcalChart(_eatenDay));
         _chartView->show();
     }
     _dayTable->Reload();

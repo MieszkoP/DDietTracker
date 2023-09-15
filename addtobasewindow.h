@@ -14,7 +14,7 @@ class AddToBaseWindow : public QDialog
 
 public:
     explicit AddToBaseWindow(QWidget *parent = nullptr);
-    ~AddToBaseWindow();
+    ~AddToBaseWindow() final;
 
 private slots:
     void on_comboBoxCategory_currentIndexChanged(int index);

@@ -10,9 +10,9 @@ AddToBaseWindow::AddToBaseWindow(QWidget *parent) :
 
     _products = AllProductsBase::GetInstance();
     int i = 0;
-    for(auto &category : *(_products->GetCategoriesMap()))
+    for(auto const& [category, products] : *(_products->GetCategoriesMap()))
     {
-        ui->comboBoxCategory->addItem(QString::fromStdString(category.first._name), i);
+        ui->comboBoxCategory->addItem(QString::fromStdString(category._name), i);
         i+=1;
     }
     ui->comboBoxCategory->addItem("Add new category", i);
@@ -34,7 +34,7 @@ AddToBaseWindow::~AddToBaseWindow()
     delete ui;
 }
 
-void AddToBaseWindow::on_comboBoxCategory_currentIndexChanged(int index)
+void AddToBaseWindow::on_comboBoxCategory_currentIndexChanged(int)
 {
 
     if("Add new category" == ui->comboBoxCategory->currentText())
@@ -49,9 +49,9 @@ void AddToBaseWindow::on_comboBoxCategory_currentIndexChanged(int index)
 
 void AddToBaseWindow::UpdateLabels()
 {
-    QuantityType quantityType = static_cast<QuantityType>(ui->comboBox_2->itemData(ui->comboBox_2->currentIndex()).toInt());
-    qDebug(std::to_string(int(quantityType)).data());
-    if(quantityType == QuantityType::volume)
+    if(
+        auto quantityType = static_cast<QuantityType>(ui->comboBox_2->itemData(ui->comboBox_2->currentIndex()).toInt()); 
+        quantityType == QuantityType::volume)
     {
         _quantityString = "ml";
     }
@@ -74,13 +74,13 @@ void AddToBaseWindow::UpdateLabels()
 }
 
 
-void AddToBaseWindow::on_comboBox_2_activated(int index)
+[[maybe_unused]] void AddToBaseWindow::on_comboBox_2_activated(int)
 {
     UpdateLabels();
 }
 
 
-void AddToBaseWindow::on_BaseQuantityValue_valueChanged(double arg1)
+[[maybe_unused]] void AddToBaseWindow::on_BaseQuantityValue_valueChanged(double)
 {
     UpdateLabels();
 }

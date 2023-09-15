@@ -6,7 +6,7 @@
 class ChartKcaloriesCreator
 {
 private:
-    QChart* _chart = nullptr;
+    QChart* _chart = new QChart();
     std::shared_ptr<EatenDay> _eatenDay = std::make_shared<EatenDay>();
     std::shared_ptr<QDateTimeAxis> _axisX = std::make_shared<QDateTimeAxis>();
     std::shared_ptr<QValueAxis> _axisY = std::make_shared<QValueAxis>();

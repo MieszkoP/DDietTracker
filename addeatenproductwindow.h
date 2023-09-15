@@ -16,7 +16,7 @@ class AddEatenProductWindow : public QDialog
 
 public:
     explicit AddEatenProductWindow(QWidget *parent = nullptr);
-    ~AddEatenProductWindow();
+    ~AddEatenProductWindow() final;
     void SetEatenDay(std::shared_ptr<EatenDay> eatenDay);
 
 private slots:

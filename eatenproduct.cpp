@@ -1,11 +1,11 @@
 #include "eatenproduct.h"
 
-EatenProduct::EatenProduct(Product product) : _product{product}
+EatenProduct::EatenProduct(const Product& product) : _product{product}
 {
 
 }
 
-EatenProduct::EatenProduct(Product product, size_unc eaten_quantity)
+EatenProduct::EatenProduct(const Product& product, size_unc eaten_quantity)
     : _product{product},
     _eaten_quantity{eaten_quantity}
 {
@@ -81,12 +81,12 @@ void EatenProduct::SetTime(int hour, int minute)
     _time = std::chrono::hh_mm_ss<std::chrono::minutes>(h+m);
 }
 
-void EatenProduct::SetDate(std::optional<std::chrono::year_month_day> date)
+void EatenProduct::SetDate(const std::optional<std::chrono::year_month_day>& date)
 {
     _day = date;
 }
 
-void EatenProduct::SetTime(std::optional<std::chrono::hh_mm_ss<std::chrono::minutes>> time)
+void EatenProduct::SetTime(const std::optional<std::chrono::hh_mm_ss<std::chrono::minutes>>& time)
 {
     _time = time;
 }
@@ -111,7 +111,7 @@ std::optional<size_unc> EatenProduct::GetQuantity() const
     return _eaten_quantity;
 }
 
-void EatenProduct::SetProduct(Product product)
+void EatenProduct::SetProduct(const Product& product)
 {
     _product = product;
 }

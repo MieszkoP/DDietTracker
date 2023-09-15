@@ -8,7 +8,7 @@ class AbstractTable : public QObject
 {
     Q_OBJECT
 protected:
-    QStandardItemModel* _model = nullptr;
+    QStandardItemModel* _model = nullptr; //Will be encapsulated in the future
     static QList<QStandardItem*> EatenProductToRow(const EatenProduct& eatenProduct);
     static void AddElementToRow(QList<QStandardItem*>& list, const std::optional<size_unc>& thing);
     static void AddElementToRow(QList<QStandardItem*>& list, const std::string& thing);
@@ -21,7 +21,7 @@ signals:
 public:
     AbstractTable();
     QTableView* ToView(QTableView* table);
-    ~AbstractTable();
+    ~AbstractTable() override;
 
 };
 

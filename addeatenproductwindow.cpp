@@ -8,9 +8,9 @@ AddEatenProductWindow::AddEatenProductWindow(QWidget *parent) :
     ui->setupUi(this);
     _products = AllProductsBase::GetInstance();
     int i = 0;
-    for (auto category: *(_products->GetCategoriesMap()))
+    for (const auto& [category, productList]: *(_products->GetCategoriesMap()))
     {
-        ui->CategoryBox->addItem(QString::fromStdString(category.first._name), i);
+        ui->CategoryBox->addItem(QString::fromStdString(category._name), i);
         i+=1;
     }
     QDateTime dateTime = QDateTime::currentDateTime();
@@ -22,9 +22,9 @@ AddEatenProductWindow::~AddEatenProductWindow()
     delete ui;
 }
 
-void AddEatenProductWindow::on_NameBox_activated(int index)
+void AddEatenProductWindow::on_NameBox_activated(int)
 {
-    Product& chosenProduct = _products->GetProduct(ui->NameBox->currentText().toStdString());
+    const Product& chosenProduct = _products->GetProduct(ui->NameBox->currentText().toStdString());
     if( chosenProduct._quantityType == QuantityType::mass)
     {
         ui->quantity_type->setText("[g]");
@@ -70,7 +70,7 @@ void AddEatenProductWindow::on_buttonBox_accepted()
     }
 
     Product chosenProduct = _products->GetProduct(ui->NameBox->currentText().toStdString());
-    size_unc quantity = size_unc(ui->valueBox->value(), ui->uncertaintyBox->value());
+    auto quantity = size_unc(ui->valueBox->value(), ui->uncertaintyBox->value());
     EatenProduct eatenProduct(chosenProduct, quantity);
 
     if(_IsDate)
@@ -89,9 +89,9 @@ void AddEatenProductWindow::on_buttonBox_accepted()
     SendSignal();
 }
 
-void AddEatenProductWindow::on_checkBox_stateChanged(int arg1)
+void AddEatenProductWindow::on_checkBox_stateChanged([[maybe_unused]] int arg1)
 {
-    _IsDate =! _IsDate;
+    _IsDate = ! _IsDate;
     ui->dateTimeEdit->setEnabled(_IsDate);
 }
 

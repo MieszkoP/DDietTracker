@@ -42,26 +42,6 @@ bool AllProductsBase::IsProduct(std::string name)
     return _base->find(name)!=_base->end();
 }
 
-//void AllProductsBase::ShowCategoryMap()
-//{
-//    for(auto element : *_categoriesMap)
-//    {
-//        qDebug("wypisanie zawartości i adresów wszystkich elementów listy kategorii");
-//        qDebug("Kategoria");
-//        qDebug(element.first._name.data());
-//        for( auto x : (*_categoriesMap)[element.first])
-//        {
-//            qDebug(x->_name.data());
-//            std::stringstream string_stream;
-//            string_stream << x;
-//            qDebug(string_stream.str().data());
-//            qDebug(" ");
-//        }
-//        qDebug(" ");
-//        qDebug(" ");
-//    }
-//}
-
 bool AllProductsBase::AddProduct(Product product)
 {
     std::stringstream string_stream;
