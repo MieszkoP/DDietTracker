@@ -23,6 +23,8 @@ The dependencies you needed include:
 After downloading the [jsoncpp](https://github.com/open-source-parsers/jsoncpp) library, you need to edit the CmakeLists.txt file by replacing the path to this library:
 
 ```set(CMAKE_PREFIX_PATH "~/vcpkg/packages/jsoncpp_x64-linux" ${CMAKE_PREFIX_PATH})```
+and delete 
+```set(CMAKE_PREFIX_PATH "/home/mieszko/Qt/5.15.2/gcc_64/lib/cmake/Qt5" ${CMAKE_PREFIX_PATH})``` or change path to installed Qt, if you want to build and run project from command line. 
 
 Next, open project in Qt Creator:
 
