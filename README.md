@@ -33,6 +33,7 @@ Set Build option to "Release" and click "Run".
 If you want to build the program from the command line, enter the following into the terminal:
 
 ```cmake -S <source_code_address> -B <built_program_folder_address>```
+
 ```cmake --build <built_program_folder_address> --config Release --target all --```
 
 ## How to create standalone app after compilation?
