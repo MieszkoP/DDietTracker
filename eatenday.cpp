@@ -43,10 +43,10 @@ size_unc EatenDay::SumProteins() const
 
 bool EatenDay::CompareByTime(const EatenProduct& a, const EatenProduct& b)
 {
-    if(a.GetDate()<b.GetDate())
+    if(a.GetDate().value()<b.GetDate().value())
         return true;
 
-    if(a.GetDate()>b.GetDate())
+    if(a.GetDate().value()>b.GetDate().value())
         return false;
 
     if(a.GetTime()->hours()<b.GetTime()->hours())

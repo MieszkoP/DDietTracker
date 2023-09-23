@@ -1,104 +1,177 @@
 #include "chartkcaloriescreator.h"
-#include "ddt.h"
 
 ChartKcaloriesCreator::ChartKcaloriesCreator()
 {
-    _axisX->setTickCount(10);
-    _axisX->setFormat("hh:mm, dd.MM");
-    _axisX->setTitleText("Date");
-    _chart->addAxis(_axisX.get(), Qt::AlignBottom);
 
-    _axisY->setLabelFormat("%i");
-    _axisY->setTitleText("Kcalories");
-    _chart->addAxis(_axisY.get(), Qt::AlignLeft);
 }
 
-QChart* ChartKcaloriesCreator::createExempleAreaChart()
+std::list<qreal> ChartKcaloriesCreator::CreateMacrosOrKcaloriesList(std::shared_ptr<EatenDay> eatenDay, macrosOrKcalories moc)
 {
-    _chart->setTitle("Area chart");
-
-    // The lower series initialized to zero values
-    QLineSeries *lowerSeries = 0;
-    QString name("Series ");
-    int nameIndex = 0;
-    _chart->setAnimationDuration(2000);
-    QtCharts::QLineSeries *series = new QtCharts::QLineSeries();
-    for (double x = 0; x <= 2 * M_PI; x += 0.1) {
-        double y = sin(x);
-        series->append(x, y);
-    }
-
-    _chart->addSeries(series);
-    return _chart;
-}
-
-QChart* ChartKcaloriesCreator::createKcalChart(std::shared_ptr<EatenDay> eatenDay)
-{
-    _eatenDay = eatenDay;
-    _chart->removeAllSeries();
-    _chart->setTitle("Kcalories chart");
-    QtCharts::QLineSeries *series = new QtCharts::QLineSeries();
-
-    qint64 minX = QDateTime(QDateTime::currentDateTime()).toMSecsSinceEpoch() + 86000000;
-    qint64 maxX = QDateTime(QDateTime::currentDateTime()).toMSecsSinceEpoch() - 86000000;
-    float maxY = 0;
-    float kcalories = 0;
-
+    float macroOrKcals = 0.0;
+    std::list<qreal> macroOrKcalsList;
     for(int i = 0; i<eatenDay->Size(); i++)
     {
-        auto product = _eatenDay->ReturnEatenProduct(i);
-        auto added_kcalories = product.GetKcalories().GetValue()+kcalories;
-        auto uncertainty = product.GetKcalories().GetUncertainty(); //uncertainty in chart will be implemented in future
+        auto product = eatenDay->ReturnEatenProduct(i);
+        float added_macroOrKcals;
+        switch (moc)
+        {
+        case macrosOrKcalories::Kcalories: added_macroOrKcals = product.GetKcalories().GetValue()+macroOrKcals;
+        break;
+        case macrosOrKcalories::Proteins: added_macroOrKcals = product.GetProteins().GetValue()+macroOrKcals;
+        break;
+        case macrosOrKcalories::Carbons: added_macroOrKcals = product.GetCarbons().GetValue()+macroOrKcals;
+        break;
+        case macrosOrKcalories::Fats: added_macroOrKcals = product.GetFats().GetValue()+macroOrKcals;
+        break;
+        }
+
+        //auto uncertainty = product.GetKcalories().GetUncertainty(); //uncertainty in chart will be implemented in future
+
+        macroOrKcalsList.push_back(macroOrKcals);
+        macroOrKcalsList.push_back(added_macroOrKcals);
+
+        macroOrKcals = added_macroOrKcals;
+    }
+
+    return macroOrKcalsList;
+}
+
+std::list<qreal> ChartKcaloriesCreator::CreateTimeList(std::shared_ptr<EatenDay> eatenDay)
+{
+    std::list<qreal> timeList;
+    for(int i = 0; i<eatenDay->Size(); i++)
+    {
+        auto product = eatenDay->ReturnEatenProduct(i);
         QDateTime momentInTime;
         if(product.GetDate().has_value())
         {
-            auto year = int(product.GetDate().value().year());
-            auto month = unsigned(product.GetDate().value().month());
-            auto day = unsigned(product.GetDate().value().day());
+        auto year = int(product.GetDate().value().year());
+        auto month = unsigned(product.GetDate().value().month());
+        auto day = unsigned(product.GetDate().value().day());
 
-            auto hours = product.GetTime().value().hours().count();
-            auto minutes = product.GetTime().value().minutes().count();
+        auto hours = product.GetTime().value().hours().count();
+        auto minutes = product.GetTime().value().minutes().count();
 
-            momentInTime.setDate(QDate(year, month, day));
-            momentInTime.setTime(QTime(hours, minutes));
+        momentInTime.setDate(QDate(year, month, day));
+        momentInTime.setTime(QTime(hours, minutes));
         }
-        else
-        {
-            QDateTime dateTime = QDateTime::currentDateTime();
-            auto year = dateTime.date().year();
-            auto month = dateTime.date().month();
-            auto day = dateTime.date().day();
+        timeList.push_back(momentInTime.toMSecsSinceEpoch());
+        timeList.push_back(momentInTime.toMSecsSinceEpoch());
+    }
+    return timeList;
+}
 
-            momentInTime.setDate(QDate(year, month, day));
-            momentInTime.setTime(QTime(6, 0));
-        }
-        product.GetKcalories();
+QChart* ChartKcaloriesCreator::createKcalChart(std::shared_ptr<EatenDay> eatenDay, AxisType xAxisType, AxisType yAxisType)
+{
 
-        series->append(momentInTime.toMSecsSinceEpoch()-5, kcalories);
-        series->append(momentInTime.toMSecsSinceEpoch(),added_kcalories);
+    std::list<qreal> xAxis;
+    std::list<qreal> yAxis;
 
-        if (minX>momentInTime.toMSecsSinceEpoch())
-        {
-            minX = momentInTime.toMSecsSinceEpoch();
-        }
+    switch(xAxisType)
+    {
 
-        if (maxX<momentInTime.toMSecsSinceEpoch())
-        {
-            maxX = momentInTime.toMSecsSinceEpoch();
-        }
+    case AxisType::Carbons: xAxis = CreateMacrosOrKcaloriesList(eatenDay, macrosOrKcalories::Carbons);
+    _axisX = std::make_shared<QValueAxis>();
+    std::dynamic_pointer_cast<QValueAxis>(_axisX)->setLabelFormat("%i");
+    _axisX->setTitleText("Carbons");
+    break;
 
-        if(maxY<added_kcalories)
-        {
-            maxY = added_kcalories;
-        }
+    case AxisType::Fats: xAxis = CreateMacrosOrKcaloriesList(eatenDay, macrosOrKcalories::Fats);
+    _axisX = std::make_shared<QValueAxis>();
+    std::dynamic_pointer_cast<QValueAxis>(_axisX)->setLabelFormat("%i");
+    _axisX->setTitleText("Fats");
+    break;
 
-        kcalories = added_kcalories;
+    case AxisType::Proteins: xAxis = CreateMacrosOrKcaloriesList(eatenDay, macrosOrKcalories::Proteins);
+    _axisX = std::make_shared<QValueAxis>();
+    std::dynamic_pointer_cast<QValueAxis>(_axisX)->setLabelFormat("%i");
+    _axisX->setTitleText("Proteins");
+    break;
+
+    case AxisType::Kcals: xAxis = CreateMacrosOrKcaloriesList(eatenDay, macrosOrKcalories::Kcalories);
+    _axisX = std::make_shared<QValueAxis>();
+    std::dynamic_pointer_cast<QValueAxis>(_axisX)->setLabelFormat("%i");
+    _axisX->setTitleText("Kcalories");
+    break;
+
+    case AxisType::Time: xAxis = CreateTimeList(eatenDay);
+    _axisX = std::make_shared<QDateTimeAxis>();
+    std::dynamic_pointer_cast<QDateTimeAxis>(_axisX)->setFormat("hh:mm, dd.MM");
+    _axisX->setTitleText("Time");
+    break;
+
+    }
+
+    switch(yAxisType)
+    {
+
+    case AxisType::Carbons: yAxis = ChartKcaloriesCreator::CreateMacrosOrKcaloriesList(eatenDay, macrosOrKcalories::Carbons);
+    _axisY = std::make_shared<QValueAxis>();
+    std::dynamic_pointer_cast<QValueAxis>(_axisY)->setLabelFormat("%i");
+    _axisY->setTitleText("Carbons");
+    break;
+
+    case AxisType::Fats: yAxis = ChartKcaloriesCreator::CreateMacrosOrKcaloriesList(eatenDay, macrosOrKcalories::Fats);
+    _axisY = std::make_shared<QValueAxis>();
+    std::dynamic_pointer_cast<QValueAxis>(_axisY)->setLabelFormat("%i");
+    _axisY->setTitleText("Fats");
+    break;
+
+    case AxisType::Proteins: yAxis = ChartKcaloriesCreator::CreateMacrosOrKcaloriesList(eatenDay, macrosOrKcalories::Proteins);
+    _axisY = std::make_shared<QValueAxis>();
+    std::dynamic_pointer_cast<QValueAxis>(_axisY)->setLabelFormat("%i");
+    _axisY->setTitleText("Proteins");
+    break;
+
+    case AxisType::Kcals: yAxis = ChartKcaloriesCreator::CreateMacrosOrKcaloriesList(eatenDay, macrosOrKcalories::Kcalories);
+    _axisY = std::make_shared<QValueAxis>();
+    std::dynamic_pointer_cast<QValueAxis>(_axisY)->setLabelFormat("%i");
+    _axisY->setTitleText("Kcalories");
+    break;
+
+    case AxisType::Time: yAxis = ChartKcaloriesCreator::CreateTimeList(eatenDay);
+    _axisY = std::make_shared<QDateTimeAxis>();
+    std::dynamic_pointer_cast<QDateTimeAxis>(_axisY)->setFormat("hh:mm, dd.MM");
+    _axisY->setTitleText("Time");
+    break;
+
+    }
+
+    _chart->addAxis(_axisX.get(), Qt::AlignBottom);
+    _chart->addAxis(_axisY.get(), Qt::AlignLeft);
+
+
+    //x vs y wykres
+    _eatenDay = eatenDay;
+    _chart->removeAllSeries();
+    auto *series = new QtCharts::QLineSeries();
+
+    qreal endX;
+    qreal endY;
+    for(auto xPoint = xAxis.begin(), yPoint=yAxis.begin(); xPoint!=xAxis.end(); xPoint++, yPoint++)
+    {
+        series->append(*xPoint, *yPoint);
     }
 
     _chart->addSeries(series);
 
-    _axisY->setRange(0, maxY+100);
-    _axisX->setRange(QDateTime::fromMSecsSinceEpoch(minX-40000), QDateTime::fromMSecsSinceEpoch(maxX+400000));
+    if(xAxisType == AxisType::Time)
+    {
+        _axisX->setRange(QDateTime::fromMSecsSinceEpoch(xAxis.front()-40000), QDateTime::fromMSecsSinceEpoch(xAxis.back()+40000));
+    }
+    else
+    {
+        _axisX->setRange(xAxis.front()-3, xAxis.back()+3);
+    }
+
+    if(yAxisType == AxisType::Time)
+    {
+        _axisY->setRange(QDateTime::fromMSecsSinceEpoch(yAxis.front()-40000), QDateTime::fromMSecsSinceEpoch(yAxis.back()+40000));
+    }
+    else
+    {
+        _axisY->setRange(yAxis.front()-3, yAxis.back()+3);
+    }
 
     series->attachAxis(_axisX.get());
     series->attachAxis(_axisY.get());

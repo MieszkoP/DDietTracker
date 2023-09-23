@@ -40,5 +40,15 @@ private:
     ChartKcaloriesCreator _chartKcaloriesCreator = ChartKcaloriesCreator();
     size_t idSelectedInBase = -1;
     size_t idSelectedInEaten = -1;
+
+    QComboBox* _setXAxis = nullptr;
+    QComboBox* _setYAxis = nullptr;
+    QHBoxLayout* _chartParametersLayout = nullptr;
+    QLabel* _labelAxisX = nullptr;
+    QLabel* _labelAxisY = nullptr;
+    void showChart(bool show);
+    AxisType _axisXType = AxisType::Time;
+    AxisType _axisYType = AxisType::Kcals;
+
 };
 #endif // MAINWINDOW_H

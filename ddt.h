@@ -5,6 +5,11 @@
 #include "size_unc.h"
 #include <chrono>
 
+enum class AxisType
+{
+    Time=0, Proteins=1, Carbons=2, Fats=3, Kcals=4
+};
+
 class DDT
 {
 protected:

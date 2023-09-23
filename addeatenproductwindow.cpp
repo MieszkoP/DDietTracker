@@ -85,6 +85,17 @@ void AddEatenProductWindow::on_buttonBox_accepted()
         eatenProduct.SetDate(year, month, day);
 
     }
+    else
+    {
+        QDateTime dateTime = QDateTime::currentDateTime();
+        auto year = dateTime.date().year();
+        auto month = dateTime.date().month();
+        auto day = dateTime.date().day();
+
+        eatenProduct.SetTime(6, 0);
+        eatenProduct.SetDate(year, month, day);
+    }
+
     _eatenDay->AddEatenProduct(eatenProduct);
     SendSignal();
 }

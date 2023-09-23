@@ -20,9 +20,46 @@ MainWindow::MainWindow(QWidget *parent)
     _eatenDay = _dayTable->GetEatenDay();
     _dayTable->LoadEatenDay(_eatenDay);
     _dayTable->ToView(ui->tableView);
-    _chartView = new QChartView(_chartKcaloriesCreator.createKcalChart(_eatenDay));
-    _chartView->hide();
+    _chartView = new QChartView(_chartKcaloriesCreator.createKcalChart(_eatenDay, _axisXType, _axisYType));
     ui->gridLayout_2->layout()->addWidget(_chartView);
+    _setXAxis = new QComboBox(this);
+    _setYAxis = new QComboBox(this);
+
+    _setXAxis->addItems({"Time", "Proteins", "Carbons", "Fats", "Kcals"});
+    _setYAxis->addItems({"Time", "Proteins", "Carbons", "Fats", "Kcals"});
+
+    _setXAxis->setCurrentIndex(0);
+    _setYAxis->setCurrentIndex(4);
+
+    _chartParametersLayout = new QHBoxLayout();
+    ui->gridLayout_2->addLayout(_chartParametersLayout, 2, 0);
+    _labelAxisX = new QLabel(this);
+    _labelAxisY = new QLabel(this);
+
+    _labelAxisX->setText("X axis: ");
+    _labelAxisY->setText("Y axis: ");
+    _chartParametersLayout->addItem(new QSpacerItem(4000, 0, QSizePolicy::Maximum, QSizePolicy::Maximum));
+    _chartParametersLayout->addWidget(_labelAxisX);
+    _chartParametersLayout->addWidget(_setXAxis);
+    _chartParametersLayout->addWidget(_labelAxisY);
+    _chartParametersLayout->addWidget(_setYAxis);
+
+    showChart(false);
+    //connect(_chartView, )
+
+    connect(this->_setXAxis, QOverload<int>::of(&QComboBox::currentIndexChanged), [this](int index)
+    {
+        _axisXType = static_cast<AxisType>(index);
+        _chartView->setChart(_chartKcaloriesCreator.createKcalChart(_eatenDay, _axisXType, _axisYType));
+        _chartView->show();
+    });
+
+    connect(this->_setYAxis, QOverload<int>::of(&QComboBox::currentIndexChanged), [this](int index)
+    {
+        _axisYType = static_cast<AxisType>(index);
+        _chartView->setChart(_chartKcaloriesCreator.createKcalChart(_eatenDay, _axisXType, _axisYType));
+        _chartView->show();
+    });
 
     _allProductsTable = new AllProductsTable();
     _allProductsTable->ToView(ui->tableView_2);
@@ -52,7 +89,6 @@ MainWindow::MainWindow(QWidget *parent)
             ui->DeleteButton_2->setEnabled(true);
             idSelectedInBase = selected.indexes().at(0).row();
         }
-
     }
             );
 
@@ -70,8 +106,14 @@ MainWindow::MainWindow(QWidget *parent)
 
             ));
 
-        _dayTable->GetEatenDay()->SumCalories();
+        if(_chartViewShowed)
+        {
+            _eatenDay->SortByTime();
+            _chartView->setChart(_chartKcaloriesCreator.createKcalChart(_eatenDay, _axisXType, _axisYType));
+            _chartView->show();
+        }
     });
+
 }
 
 MainWindow::~MainWindow()
@@ -88,16 +130,16 @@ void MainWindow::on_pushButton_2_clicked()
     _chartViewShowed = !_chartViewShowed;
     if(!_chartViewShowed)
     {
-        _chartView->close();
         ui->pushButton_2->setText("Show Chart");
+        showChart(false);
     }
     else
     {
         ui->pushButton_2->setText("Hide Chart");
         _eatenDay->SortByTime();
         _dayTable->Reload();
-        _chartView->setChart(_chartKcaloriesCreator.createKcalChart(_eatenDay));
-        _chartView->show();
+        _chartView->setChart(_chartKcaloriesCreator.createKcalChart(_eatenDay, _axisXType, _axisYType));
+        showChart(true);
     }
     ui->DeleteButton->setEnabled(false);
 }
@@ -113,17 +155,11 @@ void MainWindow::on_pushButton_3_released()
 
     connect(eatenProductWindow, &AddEatenProductWindow::SendSignal, [this, eatenDay, chartView]() {
         _dayTable->Reload();
-        if(_chartViewShowed)
-        {
-            eatenDay->SortByTime();
-            chartView->setChart(_chartKcaloriesCreator.createKcalChart(_eatenDay));
-            chartView->show();
-        }
     });
     ui->DeleteButton->setEnabled(false);
 }
 
-
+//Show chart button
 void MainWindow::on_pushButton_5_clicked()
 {
     _eatenDay->Clean();
@@ -160,12 +196,6 @@ void MainWindow::on_DeleteButton_pressed()
 {
 
     _eatenDay->RemoveEatenProduct(idSelectedInEaten);
-    if(_chartViewShowed)
-    {
-        _eatenDay->SortByTime();
-        _chartView->setChart(_chartKcaloriesCreator.createKcalChart(_eatenDay));
-        _chartView->show();
-    }
     _dayTable->Reload();
     ui->DeleteButton->setEnabled(false);
 }
@@ -181,5 +211,25 @@ void MainWindow::on_SaveButton_clicked()
     file << root;
     file.close();
     QMessageBox::information(this, "Base of Products Updated!", "Base of Products Updated!");
+}
+
+void MainWindow::showChart(bool show)
+{
+    if(show)
+    {
+        _chartView->show();
+        _setXAxis->show();
+        _setYAxis->show();
+        _labelAxisX->show();
+        _labelAxisY->show();
+    }
+    else
+    {
+        _chartView->hide();
+        _setXAxis->hide();
+        _setYAxis->hide();
+        _labelAxisX->hide();
+        _labelAxisY->hide();
+    }
 }
 
