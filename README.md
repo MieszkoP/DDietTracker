@@ -30,6 +30,11 @@ Next, open project in Qt Creator:
 
 Set Build option to "Release" and click "Run".
 
+If you want to build the program from the command line, enter the following into the terminal:
+
+```cmake -S <source_code_address> -B <built_program_folder_address>```
+```cmake --build <built_program_folder_address> --config Release --target all --```
+
 ## How to create standalone app after compilation?
 
 To turn the built version into a standalone application, you need the linuxdeployqt (for Linux) or windeployqt (for Windows) tool. They copy the libraries and plugins used by the built version to the program folder, making the program standalone.
