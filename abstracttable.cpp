@@ -4,50 +4,50 @@
 
 AbstractTable::AbstractTable() : _model(new QStandardItemModel()) {}
 
-void AbstractTable::AddElementToRow(QList<QStandardItem*>& list, const std::optional<size_unc>& thing)
+void AbstractTable::AddElementToRow(QList<QStandardItem*>& list, const std::optional<size_unc>& size_uncElement)
 {
-    QString string;
-    if(thing.has_value())
-        string = QString::number(thing.value().GetValue())+" +/- "+QString::number(thing.value().GetUncertainty());
+    QString size_uncString;
+    if(size_uncElement.has_value())
+        size_uncString = QString::number(size_uncElement.value().GetValue())+" +/- "+QString::number(size_uncElement.value().GetUncertainty());
     else
-        string = QString("No value");
+        size_uncString = QString("No value");
 
-    list.push_back(new QStandardItem(string));
+    list.push_back(new QStandardItem(size_uncString));
 }
 
-void AbstractTable::AddElementToRow(QList<QStandardItem*>& list, const std::string& thing)
+void AbstractTable::AddElementToRow(QList<QStandardItem*>& list, const std::string& stringElement)
 {
-    QString string;
-    string = QString::fromStdString(thing);
-    list.push_back(new QStandardItem(string));
+    QString QtstringString;
+    QtstringString = QString::fromStdString(stringElement);
+    list.push_back(new QStandardItem(QtstringString));
 }
 
-void AbstractTable::AddElementToRow(QList<QStandardItem*>& list, const std::optional<std::chrono::year_month_day>& thing)
+void AbstractTable::AddElementToRow(QList<QStandardItem*>& list, const std::optional<std::chrono::year_month_day>& dateElement)
 {
-    QString string;
-    string = QString::fromStdString(DDT::DateOptionAsString(thing));
-    list.push_back(new QStandardItem(string));
+    QString dateString;
+    dateString = QString::fromStdString(DDT::DateOptionAsString(dateElement));
+    list.push_back(new QStandardItem(dateString));
 }
 
-void AbstractTable::AddElementToRow(QList<QStandardItem*>& list, const std::optional<std::chrono::hh_mm_ss< std::chrono::minutes>>& thing)
+void AbstractTable::AddElementToRow(QList<QStandardItem*>& list, const std::optional<std::chrono::hh_mm_ss< std::chrono::minutes>>& timeElement)
 {
-    QString string;
-    string = QString::fromStdString(DDT::TimeOptionAsString(thing));
-    list.push_back(new QStandardItem(string));
+    QString timeString;
+    timeString = QString::fromStdString(DDT::TimeOptionAsString(timeElement));
+    list.push_back(new QStandardItem(timeString));
 }
 
-void AbstractTable::AddElementToRow(QList<QStandardItem*>& list, const QuantityType& thing)
+void AbstractTable::AddElementToRow(QList<QStandardItem*>& list, const QuantityType& quantityElement)
 {
-    QString string;
-    if(thing == QuantityType::mass)
+    QString quantityString;
+    if(quantityElement == QuantityType::mass)
     {
-        string = "Mass";
+        quantityString = "Mass";
     }
     else
     {
-        string = "Volume";
+        quantityString = "Volume";
     }
-    list.push_back(new QStandardItem(string));
+    list.push_back(new QStandardItem(quantityString));
 }
 
 QTableView* AbstractTable::ToView(QTableView* tableView)

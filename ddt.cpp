@@ -131,7 +131,7 @@ std::string DDT::TimeOptionAsString(std::optional<std::chrono::hh_mm_ss< std::ch
     {
         std::string hour = std::to_string(time.value().hours().count());
         std::string minute = std::to_string(time.value().minutes().count());
-        return hour+"."+minute;
+        return hour+":"+minute;
     }
     else
     {
@@ -192,6 +192,8 @@ void DDT::LoadProductBase()
     deserializer.RootToObject(products);
     file2.close();
 
+    if(!std::filesystem::is_directory("days"))
+        std::filesystem::create_directory("days");
 }
 
 void DDT::UpdateProductBase()

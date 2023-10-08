@@ -13,12 +13,14 @@ private:
     std::shared_ptr<EatenDay> _eatenDay = std::make_shared<EatenDay>();
     std::shared_ptr<QAbstractAxis> _axisX = nullptr;
     std::shared_ptr<QAbstractAxis> _axisY = nullptr;
+    bool _orangePointsVisible = true;
 
-    static std::list<qreal> CreateMacrosOrKcaloriesList(std::shared_ptr<EatenDay> eatenDay, macrosOrKcalories moc);
+    static std::array<std::list<qreal>, 3>CreateMacrosOrKcaloriesList(std::shared_ptr<EatenDay> eatenDay, macrosOrKcalories moc);
     static std::list<qreal> CreateTimeList(std::shared_ptr<EatenDay> eatenDay);
 
 public:
     ChartKcaloriesCreator();
+    void setOrangePointsVisible(bool isVisible);
     QChart* createKcalChart(std::shared_ptr<EatenDay> eatenDay, AxisType xAxisType, AxisType yAxisType);
 };
 

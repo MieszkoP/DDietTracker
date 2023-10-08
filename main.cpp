@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
     DDT::LoadProductBase();
     QApplication a(argc, argv);
     MainWindow w;
-    w.setWindowTitle("Desktop Diet Tracker v. 0.2");
+    w.setWindowTitle("Desktop Diet Tracker v. 1.0");
     w.show();
     return QApplication::exec();
 }

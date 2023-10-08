@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>893</width>
-    <height>566</height>
+    <width>1032</width>
+    <height>582</height>
    </rect>
   </property>
   <property name="palette">
@@ -563,6 +563,20 @@
              </spacer>
             </item>
             <item>
+             <widget class="QPushButton" name="LoadDayButton">
+              <property name="text">
+               <string>Load the Day</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="SaveDayButton">
+              <property name="text">
+               <string>Save the Day</string>
+              </property>
+             </widget>
+            </item>
+            <item>
              <widget class="QPushButton" name="DeleteButton">
               <property name="enabled">
                <bool>false</bool>
@@ -709,7 +723,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>893</width>
+     <width>1032</width>
      <height>22</height>
     </rect>
    </property>

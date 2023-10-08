@@ -25,12 +25,12 @@ size_unc operator/(const size_unc &n1, const size_unc &n2)
 
 float size_unc::GetUpperBound() const
 {
-    return _size-_unc;
+    return _size+_unc;
 };
 
 float size_unc::GetLowerBound() const
 {
-    return _size+_unc;
+    return _size-_unc;
 };
 
 std::ostream& operator<<(std::ostream& ostr, const size_unc& obj)

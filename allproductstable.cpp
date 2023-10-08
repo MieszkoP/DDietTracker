@@ -35,9 +35,9 @@ void AllProductsTable::Reload()
     _model->setHorizontalHeaderItem(1, new QStandardItem("Name"));
     _model->setHorizontalHeaderItem(2, new QStandardItem("Quantity"));
     _model->setHorizontalHeaderItem(3, new QStandardItem("Standard Quantity"));
-    _model->setHorizontalHeaderItem(4, new QStandardItem("Proteins"));
-    _model->setHorizontalHeaderItem(5, new QStandardItem("Fats"));
-    _model->setHorizontalHeaderItem(6, new QStandardItem("Carbons"));
+    _model->setHorizontalHeaderItem(4, new QStandardItem("Proteins [g]"));
+    _model->setHorizontalHeaderItem(5, new QStandardItem("Fats [g]"));
+    _model->setHorizontalHeaderItem(6, new QStandardItem("Carbons [g]"));
     _model->setHorizontalHeaderItem(7, new QStandardItem("Kcals"));
     _model->setHorizontalHeaderItem(8, new QStandardItem("Quantity Type"));
     for(auto const &[productName, product] : *(_allProducstBase->GetBase()))

@@ -30,6 +30,10 @@ private slots:
     void on_DeleteButton_pressed();
     void on_SaveButton_clicked();
 
+    void on_SaveDayButton_released();
+
+    void on_LoadDayButton_released();
+
 private:
     Ui::MainWindow *ui;
     DayTable* _dayTable = new DayTable();
@@ -43,10 +47,14 @@ private:
 
     QComboBox* _setXAxis = nullptr;
     QComboBox* _setYAxis = nullptr;
+    QComboBox* _setOrangePointsVisible = nullptr;
+
     QHBoxLayout* _chartParametersLayout = nullptr;
     QLabel* _labelAxisX = nullptr;
     QLabel* _labelAxisY = nullptr;
+    QLabel* _labelPointsVisible = nullptr;
     void showChart(bool show);
+    bool _pointsVisible = true;
     AxisType _axisXType = AxisType::Time;
     AxisType _axisYType = AxisType::Kcals;
 

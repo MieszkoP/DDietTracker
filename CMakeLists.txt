@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(DDietTracker VERSION 0.2 LANGUAGES CXX)
+project(DDietTracker VERSION 1.0 LANGUAGES CXX)
 
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)

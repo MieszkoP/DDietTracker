@@ -8,6 +8,10 @@
 #include "addtobasewindow.h"
 #include <json/json.h>
 #include "apbaseserializer.h"
+#include "eatendayserializer.h"
+#include "eatendaydeserializer.h"
+#include <filesystem>
+
 
 using Data = QPair<QPointF, QString>;
 
@@ -21,31 +25,38 @@ MainWindow::MainWindow(QWidget *parent)
     _dayTable->LoadEatenDay(_eatenDay);
     _dayTable->ToView(ui->tableView);
     _chartView = new QChartView(_chartKcaloriesCreator.createKcalChart(_eatenDay, _axisXType, _axisYType));
+    _chartView->setRubberBand(QChartView::RectangleRubberBand);
     ui->gridLayout_2->layout()->addWidget(_chartView);
     _setXAxis = new QComboBox(this);
     _setYAxis = new QComboBox(this);
+    _setOrangePointsVisible = new QComboBox(this);
 
     _setXAxis->addItems({"Time", "Proteins", "Carbons", "Fats", "Kcals"});
     _setYAxis->addItems({"Time", "Proteins", "Carbons", "Fats", "Kcals"});
+    _setOrangePointsVisible->addItems({"Hidden", "Visible"});
 
     _setXAxis->setCurrentIndex(0);
     _setYAxis->setCurrentIndex(4);
+    _setOrangePointsVisible->setCurrentIndex(1);
 
     _chartParametersLayout = new QHBoxLayout();
     ui->gridLayout_2->addLayout(_chartParametersLayout, 2, 0);
     _labelAxisX = new QLabel(this);
     _labelAxisY = new QLabel(this);
+    _labelPointsVisible = new QLabel(this);
 
     _labelAxisX->setText("X axis: ");
     _labelAxisY->setText("Y axis: ");
+    _labelPointsVisible->setText("Orange points: ");
     _chartParametersLayout->addItem(new QSpacerItem(4000, 0, QSizePolicy::Maximum, QSizePolicy::Maximum));
+    _chartParametersLayout->addWidget(_labelPointsVisible);
+    _chartParametersLayout->addWidget(_setOrangePointsVisible);
     _chartParametersLayout->addWidget(_labelAxisX);
     _chartParametersLayout->addWidget(_setXAxis);
     _chartParametersLayout->addWidget(_labelAxisY);
     _chartParametersLayout->addWidget(_setYAxis);
 
     showChart(false);
-    //connect(_chartView, )
 
     connect(this->_setXAxis, QOverload<int>::of(&QComboBox::currentIndexChanged), [this](int index)
     {
@@ -60,6 +71,14 @@ MainWindow::MainWindow(QWidget *parent)
         _chartView->setChart(_chartKcaloriesCreator.createKcalChart(_eatenDay, _axisXType, _axisYType));
         _chartView->show();
     });
+
+    connect(this->_setOrangePointsVisible, QOverload<int>::of(&QComboBox::currentIndexChanged), [this](int index)
+            {
+                _pointsVisible = static_cast<bool>(index);
+                _chartKcaloriesCreator.setOrangePointsVisible(_pointsVisible);
+                _chartView->setChart(_chartKcaloriesCreator.createKcalChart(_eatenDay, _axisXType, _axisYType));
+                _chartView->show();
+            });
 
     _allProductsTable = new AllProductsTable();
     _allProductsTable->ToView(ui->tableView_2);
@@ -231,5 +250,40 @@ void MainWindow::showChart(bool show)
         _labelAxisX->hide();
         _labelAxisY->hide();
     }
+}
+
+
+void MainWindow::on_SaveDayButton_released()
+{
+    QFileDialog* qfiledialog = new QFileDialog();
+    qfiledialog->setDefaultSuffix("json");
+    auto eatenDaySavedName = qfiledialog->getSaveFileName(this, "Save the eaten day", std::filesystem::current_path().append("days").string().data(), tr("*.json"));
+    if (!eatenDaySavedName.endsWith(".json", Qt::CaseInsensitive)) {
+        eatenDaySavedName += ".json";
+    }
+    qDebug() << qfiledialog->defaultSuffix().toStdString().data();
+    qDebug() <<"\n";
+    Json::Value root;
+    EatenDaySerializer eatenDaySerializer(root);
+    eatenDaySerializer.ObjectToRoot(*_eatenDay);
+    std::ofstream file(eatenDaySavedName.toStdString());
+    qDebug()<<eatenDaySavedName;
+    file << root;
+    file.close();
+}
+
+
+void MainWindow::on_LoadDayButton_released()
+{
+    auto eatenDaySavedName = QFileDialog::getOpenFileName(this, "Load the eaten day", std::filesystem::current_path().append("days").string().data(), tr("*.json"));
+    EatenDay eatenDay;
+    std::ifstream file(eatenDaySavedName.toStdString());
+    Json::Value root;
+    EatenDayDeserializer deserializer(root);
+    deserializer.FileToRoot(file);
+    _eatenDay->Clean();
+    deserializer.RootToObject(*_eatenDay);
+    _dayTable->Reload();
+    file.close();
 }
 
