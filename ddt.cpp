@@ -59,7 +59,7 @@ std::optional<size_unc> DDT::StringToProductOption(std::string value, std::strin
 
 std::optional<std::chrono::hh_mm_ss< std::chrono::minutes>> DDT::StringToTimeOption(std::string time)
 {
-    std::regex pat {R"((\d+)\.(\d+))"};
+    std::regex pat {R"((\d+)\:(\d+))"};
 
     std::smatch m;
 
