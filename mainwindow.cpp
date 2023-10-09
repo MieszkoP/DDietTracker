@@ -264,6 +264,8 @@ void MainWindow::on_SaveDayButton_released()
     QFileDialog* qfiledialog = new QFileDialog();
     qfiledialog->setDefaultSuffix("json");
     auto eatenDaySavedName = qfiledialog->getSaveFileName(this, "Save the eaten day", std::filesystem::current_path().append("days").string().data(), tr("*.json"));
+    if(eatenDaySavedName.isNull())
+        return;
     if (!eatenDaySavedName.endsWith(".json", Qt::CaseInsensitive)) {
         eatenDaySavedName += ".json";
     }
@@ -282,6 +284,8 @@ void MainWindow::on_SaveDayButton_released()
 void MainWindow::on_LoadDayButton_released()
 {
     auto eatenDaySavedName = QFileDialog::getOpenFileName(this, "Load the eaten day", std::filesystem::current_path().append("days").string().data(), tr("*.json"));
+    if(eatenDaySavedName.isNull())
+        return;
     EatenDay eatenDay;
     std::ifstream file(eatenDaySavedName.toStdString());
     Json::Value root;
