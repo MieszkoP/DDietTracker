@@ -239,16 +239,22 @@ void MainWindow::showChart(bool show)
         _chartView->show();
         _setXAxis->show();
         _setYAxis->show();
+        _setOrangePointsVisible->show();
+
         _labelAxisX->show();
         _labelAxisY->show();
+        _labelPointsVisible->show();
     }
     else
     {
         _chartView->hide();
         _setXAxis->hide();
         _setYAxis->hide();
+        _setOrangePointsVisible->hide();
+
         _labelAxisX->hide();
         _labelAxisY->hide();
+        _labelPointsVisible->hide();
     }
 }
 
