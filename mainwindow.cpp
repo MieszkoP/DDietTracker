@@ -269,13 +269,10 @@ void MainWindow::on_SaveDayButton_released()
     if (!eatenDaySavedName.endsWith(".json", Qt::CaseInsensitive)) {
         eatenDaySavedName += ".json";
     }
-    qDebug() << qfiledialog->defaultSuffix().toStdString().data();
-    qDebug() <<"\n";
     Json::Value root;
     EatenDaySerializer eatenDaySerializer(root);
     eatenDaySerializer.ObjectToRoot(*_eatenDay);
     std::ofstream file(eatenDaySavedName.toStdString());
-    qDebug()<<eatenDaySavedName;
     file << root;
     file.close();
 }
